@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4285f4;
+  display: block; 
+}
+.profile-header h1 {
+  color: #2d3748;
+  margin: 0;
+}
+
