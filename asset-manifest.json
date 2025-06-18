@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/VaradScript/profile-app.git/static/css/main.72753714.css",
+    "main.js": "/VaradScript/profile-app.git/static/js/main.aaeefe69.js",
+    "static/js/453.bf0199e4.chunk.js": "/VaradScript/profile-app.git/static/js/453.bf0199e4.chunk.js",
+    "index.html": "/VaradScript/profile-app.git/index.html",
+    "main.72753714.css.map": "/VaradScript/profile-app.git/static/css/main.72753714.css.map",
+    "main.aaeefe69.js.map": "/VaradScript/profile-app.git/static/js/main.aaeefe69.js.map",
+    "453.bf0199e4.chunk.js.map": "/VaradScript/profile-app.git/static/js/453.bf0199e4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.72753714.css",
+    "static/js/main.aaeefe69.js"
+  ]
+}
