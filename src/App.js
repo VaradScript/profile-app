@@ -1,64 +1,42 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Desktop from './components/Desktop';
+import BootScreen from './components/BootScreen';
+import LoginScreen from './components/LoginScreen';
 import './App.css';
 
 function App() {
-  const [profile, setProfile] = useState({
-    name: 'Varad',
-    title: 'Web Developer',
-    bio: 'I build awesome web applications',
-    imageUrl: 'https://i.imgur.com/mCHMpLT.jpg'
-  });
+  const [gameState, setGameState] = useState('boot'); // boot, login, desktop
 
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProfile(prev => ({ ...prev, [name]: value }));
+  const handleBootComplete = () => {
+    setGameState('login');
   };
 
-  const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setProfile(prev => ({ ...prev, imageUrl: event.target.result }));
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
+  const handleLogin = () => {
+    setGameState('desktop');
+  };
+
+  const handleLogOff = () => {
+    setGameState('login');
+  };
+
+  const handleShutdown = () => {
+    setGameState('shutdown');
   };
 
   return (
-     <div className="profile-container">
-       <div className="profile-header">
-        <h1>Profile </h1>
-      </div>
-    <div className="container">
-      <div className="profile">
-        <div className="picture">
-          <img src={profile.imageUrl} alt="Profile" />
-          {isEditing && (
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-          )}
+    <div className="App">
+      {gameState === 'boot' && <BootScreen onComplete={handleBootComplete} />}
+      {gameState === 'login' && <LoginScreen onLogin={handleLogin} onShutdown={handleShutdown} />}
+      {gameState === 'desktop' && <Desktop onLogOff={handleLogOff} onShutdown={handleShutdown} />}
+      {gameState === 'shutdown' && (
+        <div style={{ width: '100vw', height: '100vh', background: 'black', cursor: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontFamily: 'Tahoma, sans-serif' }}>
+          <div style={{ textAlign: 'center' }}>
+            <h1 style={{ fontSize: '24px', marginBottom: '20px' }}>It is now safe to turn off your computer.</h1>
+            <p style={{ fontSize: '18px', color: '#ccc' }}>Thank you for visiting us.</p>
+          </div>
         </div>
-        <div className="info">
-          {isEditing ? (
-            <>
-              <input name="name" value={profile.name} onChange={handleChange} />
-              <input name="title" value={profile.title} onChange={handleChange} />
-              <textarea name="bio" value={profile.bio} onChange={handleChange} />
-            </>
-          ) : (
-            <>
-              <h2>{profile.name}</h2>
-              <p>{profile.title}</p>
-              <p>{profile.bio}</p>
-            </>
-          )}
-        </div>
-      </div>
-      <button onClick={() => setIsEditing(!isEditing)}>
-        {isEditing ? 'Save' : 'Edit'}
-      </button>
-    </div>
+      )}
+      <div className="crt-overlay"></div>
     </div>
   );
 }
