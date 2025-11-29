@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# Varadaraj Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A custom React portfolio website deployed on Vercel with the personalized domain  
+https://varadaraj.online
 
-## Available Scripts
+This README explains how to customize the title, favicon (logo), and deploy updates.
 
-In the project directory, you can run:
+------------------------------------------------------------
 
-### `npm start`
+## 🚀 Project Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Install dependencies:
+npm install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Run development server:
+npm start
 
-### `npm test`
+------------------------------------------------------------
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🎨 Customize Website Title
 
-### `npm run build`
+1. Open:
+public/index.html
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Find:
+<title>React App</title>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Replace with:
+<title>Varadaraj Portfolio</title>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+------------------------------------------------------------
 
-### `npm run eject`
+## 🖼️ Change Website Favicon (Logo)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The favicon is the small icon in the browser tab.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Steps:
+1. Create your logo (PNG/JPG).
+2. Convert it to .ico using:
+   https://favicon.io/favicon-converter/
+3. Open folder:
+   public/
+4. Delete old:
+   favicon.ico
+5. Add your new:
+   public/favicon.ico
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Important:
+Clear browser cache using:
+CTRL + SHIFT + R
+(or open the site in incognito mode)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+------------------------------------------------------------
 
-## Learn More
+## 🌐 Deploying to Vercel
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project is linked to GitHub and auto-deploys.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To deploy changes:
+git add .
+git commit -m "Updated favicon and title"
+git push
 
-### Code Splitting
+Vercel will automatically update the live site:
+https://varadaraj.online
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+------------------------------------------------------------
 
-### Analyzing the Bundle Size
+## 🌍 Custom Domain Setup (Completed)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Registrar: GoDaddy  
+Root Domain (A Record):
+@ → 76.76.21.21
 
-### Making a Progressive Web App
+WWW Redirect:
+www → cname.vercel-dns.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+SSL: Automatically handled by Vercel
 
-### Advanced Configuration
+------------------------------------------------------------
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📁 Project Structure
 
-### Deployment
+### project-folder/
+ ├─ public/
+ │   ├─ favicon.ico      ← your custom logo
+ │   ├─ index.html       ← change title here
+ ├─ src/
+ │   ├─ components/
+ │   ├─ App.js
+ │   └─ index.js
+ ├─ README.md
+ ├─ package.json
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+------------------------------------------------------------
 
-### `npm run build` fails to minify
+## ✨ Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Fast Vercel Deployment  
+- Custom Domain (varadaraj.online)  
+- Custom Logo + Title  
+- React App UI  
+- Automatic SSL  
+- Easy to maintain
+
+
