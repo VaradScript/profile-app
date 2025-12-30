@@ -34,7 +34,8 @@ function App() {
     };
 
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const sections = document.querySelectorAll('.section-wrapper');
+    // Observe the divs with IDs directly
+    const sections = document.querySelectorAll('.theme-trigger');
     sections.forEach((section) => observer.observe(section));
 
     return () => observer.disconnect();
@@ -55,19 +56,19 @@ function App() {
       ></div>
 
       <main>
-        <div id="section-hero">
+        <div id="section-hero" className="theme-trigger">
           <Hero />
         </div>
-        <div id="section-about">
+        <div id="section-about" className="theme-trigger">
           <About />
         </div>
-        <div id="section-experience">
+        <div id="section-experience" className="theme-trigger">
           <Experience />
         </div>
-        <div id="section-works">
+        <div id="section-works" className="theme-trigger">
           <Works />
         </div>
-        <div id="section-contact">
+        <div id="section-contact" className="theme-trigger">
           <Contact />
         </div>
       </main>
