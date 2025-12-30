@@ -1,50 +1,94 @@
-.profile-card {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-color: #0a192f;
+  --bg-secondary: #112240;
+  --bg-tertiary: #233554;
+  --text-primary: #ccd6f6;
+  --text-secondary: #8892b0;
+  --accent: #64ffda;
+  --accent-tint: rgba(100, 255, 218, 0.1);
 }
 
-.profile-info h2 {
-  color: #333;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.profile-info p {
-  color: #666;
-  margin: 10px 0;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
 }
 
-button {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.section-wrapper {
+  padding: 100px 0;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.accent-text {
+  color: var(--accent);
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.big-heading {
+  font-size: clamp(40px, 8vw, 80px);
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.medium-heading {
+  font-size: clamp(30px, 5vw, 60px);
+  color: var(--text-secondary);
+  line-height: 1.1;
+}
+
+.desc-text {
+  margin-top: 25px;
+  max-width: 540px;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.outline-btn {
+  color: var(--accent);
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 1.25rem 1.75rem;
+  font-size: 14px;
+  font-family: 'Fira Code', monospace;
+  text-decoration: none;
   cursor: pointer;
-  margin-top: 10px;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  display: inline-block;
 }
 
-button:hover {
-  background: #0056b3;
+.outline-btn:hover {
+  background-color: var(--accent-tint);
 }
 
-.edit-form input,
-.edit-form textarea {
-  width: 100%;
-  padding: 8px;
-  margin: 5px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.edit-form textarea {
-  height: 80px;
-}
-
-/* CRT Effect */
+/* CRT Effect Overlay */
 .crt-overlay {
   position: fixed;
   top: 0;
@@ -54,5 +98,59 @@ button:hover {
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
-  z-index: 99999;
+  z-index: 100;
+  opacity: 0.1;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.08;
+  }
+
+  100% {
+    opacity: 0.1;
+  }
+}
+
+/* Custom Cursor / Spotlight Effect */
+.cursor-blob {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(29, 78, 216, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.2em;
+  background-color: var(--accent);
+  margin-left: 5px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+  from,
+  to {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
