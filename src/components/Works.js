@@ -31,30 +31,28 @@ const Works = () => {
                 viewport={{ once: true }}
                 style={{ width: '100%', maxWidth: '1100px' }}
             >
-                <div style={{ textAlign: 'left', marginBottom: '50px', borderLeft: '4px solid var(--works-accent)', paddingLeft: '20px' }}>
+                <div style={{ textAlign: 'left', marginBottom: '50px', borderLeft: '4px solid var(--cyber-accent)', paddingLeft: '20px' }}>
                     <h2 style={{ fontSize: '32px', letterSpacing: '2px' }}>[PROJECT_ARCHIVE]</h2>
-                    <p style={{ color: 'var(--works-accent)', fontFamily: 'Fira Code', fontSize: '14px' }}>SELECTED_REPOSITORY_DATA_v2</p>
+                    <p style={{ color: 'var(--cyber-accent)', fontFamily: 'JetBrains Mono', fontSize: '14px' }}>SELECTED_REPOSITORY_DATA_v2</p>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px' }}>
                     {projects.map((p, i) => (
                         <motion.div
                             key={i}
-                            whileHover={{ y: -12, boxShadow: `0 10px 40px -10px var(--works-glow)` }}
+                            whileHover={{ y: -5, boxShadow: `0 10px 40px -10px var(--cyber-dim)` }}
+                            className="cyber-box"
                             style={{
-                                background: 'rgba(129, 140, 248, 0.05)',
-                                border: '1px solid rgba(129, 140, 248, 0.2)',
                                 padding: '25px',
-                                borderRadius: '4px',
-                                backdropFilter: 'blur(8px)',
                                 transition: 'all 0.3s'
                             }}
                         >
+                            {/* Replaced image with a cyber placeholder or grid if image fails, but keeping image logic for now */}
                             <h3 style={{ fontSize: '20px', marginBottom: '15px', color: '#fff' }}>{p.title}</h3>
                             <p style={{ fontSize: '14px', color: 'rgba(226, 232, 240, 0.8)', marginBottom: '25px', lineHeight: '1.6', minHeight: '100px' }}>{p.desc}</p>
                             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                                 {p.tech.map(t => (
-                                    <span key={t} style={{ fontSize: '10px', fontFamily: 'Fira Code', color: 'var(--works-accent)', background: 'rgba(129, 140, 248, 0.1)', padding: '4px 10px', borderRadius: '2px' }}>
+                                    <span key={t} style={{ fontSize: '10px', fontFamily: 'JetBrains Mono', color: 'var(--cyber-accent)', background: 'rgba(204, 255, 0, 0.1)', padding: '4px 10px', borderRadius: '2px' }}>
                                         {t}
                                     </span>
                                 ))}
@@ -63,7 +61,7 @@ const Works = () => {
                     ))}
                 </div>
                 <div style={{ marginTop: '50px', textAlign: 'center' }}>
-                    <a href="https://github.com" target="_blank" rel="noreferrer" className="outline-btn" style={{ borderColor: 'var(--works-accent)', color: 'var(--works-accent)' }}>
+                    <a href="https://github.com" target="_blank" rel="noreferrer" className="outline-btn" style={{ borderColor: 'var(--cyber-accent)', color: 'var(--cyber-accent)' }}>
                         EXPLORE_MORE_DATA
                     </a>
                 </div>

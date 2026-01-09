@@ -45,10 +45,10 @@ const Experience = () => {
                 viewport={{ once: true }}
                 style={{ width: '100%', maxWidth: '900px' }}
             >
-                <div style={{ border: '1px solid var(--exp-accent)', padding: '30px', background: 'rgba(0, 255, 65, 0.03)', borderRadius: '2px', position: 'relative' }}>
-                    <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--exp-accent)', paddingBottom: '10px' }}>
-                        <h2 style={{ fontSize: '18px', color: 'var(--exp-accent)' }}>[LOG_FILES/WORK_HISTORY]</h2>
-                        <span style={{ fontSize: '12px', opacity: 0.6 }}>VARAD_PORTFOLIO_v4.2</span>
+                <div className="cyber-box">
+                    <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--cyber-border)', paddingBottom: '10px' }}>
+                        <h2 style={{ fontSize: '18px', color: 'var(--cyber-accent)', fontFamily: 'JetBrains Mono' }}>[LOG_FILES/WORK_HISTORY]</h2>
+                        <span style={{ fontSize: '12px', opacity: 0.6, fontFamily: 'JetBrains Mono' }}>VARAD_OS_KERNEL_v1.0</span>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: '40px' }}>
@@ -58,12 +58,12 @@ const Experience = () => {
                                     key={i}
                                     onClick={() => setSelected(i)}
                                     style={{
-                                        background: selected === i ? 'var(--exp-accent)' : 'transparent',
-                                        color: selected === i ? 'black' : 'var(--exp-accent)',
-                                        border: '1px solid var(--exp-accent)',
+                                        background: selected === i ? 'var(--cyber-accent)' : 'transparent',
+                                        color: selected === i ? 'black' : 'var(--cyber-accent)',
+                                        border: '1px solid var(--cyber-accent)',
                                         padding: '10px 15px',
                                         textAlign: 'left',
-                                        fontFamily: 'Fira Code',
+                                        fontFamily: 'JetBrains Mono',
                                         fontSize: '13px',
                                         transition: '0.2s',
                                         cursor: 'none'
@@ -74,12 +74,12 @@ const Experience = () => {
                             ))}
                         </div>
                         <div>
-                            <h3 style={{ fontSize: '20px', color: 'var(--exp-accent)', marginBottom: '5px' }}>{experiences[selected].role}</h3>
-                            <p style={{ fontSize: '12px', marginBottom: '20px', color: 'var(--exp-accent)', opacity: 0.7 }}>{`STARDATE: ${experiences[selected].range}`}</p>
-                            <div style={{ fontSize: '15px', lineHeight: '1.5', color: 'var(--exp-accent)' }}>
+                            <h3 style={{ fontSize: '20px', color: 'var(--cyber-text)', marginBottom: '5px' }}>{experiences[selected].role}</h3>
+                            <p style={{ fontSize: '12px', marginBottom: '20px', color: 'var(--cyber-accent)', opacity: 0.7, fontFamily: 'JetBrains Mono' }}>{`STARDATE: ${experiences[selected].range}`}</p>
+                            <div style={{ fontSize: '15px', lineHeight: '1.5', color: 'var(--cyber-text)' }}>
                                 {experiences[selected].logs.map((log, i) => (
                                     <p key={i} style={{ marginBottom: '12px', display: 'flex' }}>
-                                        <span style={{ marginRight: '15px', opacity: 0.5 }}>0x0{i + 1}</span>{log}
+                                        <span style={{ marginRight: '15px', color: 'var(--cyber-accent)', fontFamily: 'JetBrains Mono' }}>0x0{i + 1}</span>{log}
                                     </p>
                                 ))}
                             </div>

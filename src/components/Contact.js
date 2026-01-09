@@ -10,9 +10,9 @@ const Contact = () => {
                 viewport={{ once: true }}
                 style={{ textAlign: 'center', maxWidth: '700px' }}
             >
-                <div style={{ border: '2px double var(--contact-accent)', padding: '50px', borderRadius: '4px', background: 'rgba(255, 176, 0, 0.05)' }}>
+                <div className="cyber-box">
                     <h2 style={{ marginBottom: '30px' }}>ESTABLISH_LINK</h2>
-                    <p className="desc-text" style={{ fontSize: '20px', fontFamily: 'Courier New', color: 'var(--contact-accent)' }}>
+                    <p className="desc-text" style={{ fontSize: '20px', fontFamily: 'JetBrains Mono', color: 'var(--cyber-accent)' }}>
                         SIGNAL STRENGTH: WEAK... <br />
                         RECIPIENT: VARAD@TERMINAL_7<br /><br />
                         DO YOU WISH TO TRANSMIT A MESSAGE TO THE MAINframe?
@@ -24,7 +24,7 @@ const Contact = () => {
                     </div>
                 </div>
 
-                <div style={{ marginTop: '60px', opacity: 0.5, fontFamily: 'Fira Code', fontSize: '12px' }}>
+                <div style={{ marginTop: '60px', opacity: 0.5, fontFamily: 'JetBrains Mono', fontSize: '12px' }}>
                     <p>STATUS: ONLINE // ENCRYPTION: ACTIVE</p>
                     <p>© 1982-2025 VARAD SYSTEMS CORP.</p>
                 </div>
