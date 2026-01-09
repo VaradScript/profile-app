@@ -26,32 +26,51 @@ const Hero = () => {
         return () => clearTimeout(timer);
     }, [text, isDeleting, loopNum, typingSpeed, phrases]);
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.3
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, x: -20 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    };
+
     return (
         <section className="section-wrapper">
             <motion.div
                 className="cyber-box"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
                 style={{ width: '100%' }}
             >
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', fontFamily: 'JetBrains Mono', fontSize: '12px', color: '#666' }}>
+                <motion.div
+                    variants={itemVariants}
+                    style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', fontFamily: 'JetBrains Mono', fontSize: '12px', color: '#666' }}
+                >
                     <span>ID: VARAD-001</span>
                     <span style={{ color: 'var(--cyber-accent)' }}>● SYSTEM ONLINE</span>
-                </div>
+                </motion.div>
 
-                <span className="accent-text">&gt; System.init(): Hi, my name is</span>
-                <h1 className="big-heading glitch" data-text="Varad.">Varad.</h1>
-                <h2 className="medium-heading">
+                <motion.span variants={itemVariants} className="accent-text">&gt; System.init(): Hi, my name is</motion.span>
+                <motion.h1 variants={itemVariants} className="big-heading glitch" data-text="Varad.">Varad.</motion.h1>
+                <motion.h2 variants={itemVariants} className="medium-heading">
                     I {text}<span className="typewriter-cursor">_</span>
-                </h2>
-                <p className="desc-text">
+                </motion.h2>
+                <motion.p variants={itemVariants} className="desc-text">
                     Full-stack engineer and digital architect. Specializing in high-performance web applications and immersive interfaces.
-                </p>
-                <div style={{ marginTop: '30px', display: 'flex', gap: '20px' }}>
+                </motion.p>
+                <motion.div variants={itemVariants} style={{ marginTop: '30px', display: 'flex', gap: '20px' }}>
                     <a href="#section-code" className="outline-btn">INITIATE_PROJECTS</a>
                     <a href="#section-contact" className="outline-btn" style={{ borderColor: '#fff', color: '#fff' }}>ESTABLISH_UPLINK</a>
-                </div>
+                </motion.div>
             </motion.div>
         </section>
     );

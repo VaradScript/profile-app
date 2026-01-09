@@ -36,30 +36,42 @@ const Works = () => {
                     <p style={{ color: 'var(--cyber-accent)', fontFamily: 'JetBrains Mono', fontSize: '14px' }}>SELECTED_REPOSITORY_DATA_v2</p>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px' }}>
+                <motion.div
+                    variants={{
+                        hidden: { opacity: 0 },
+                        visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+                    }}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}
+                >
                     {projects.map((p, i) => (
                         <motion.div
                             key={i}
-                            whileHover={{ y: -5, boxShadow: `0 10px 40px -10px var(--cyber-dim)` }}
+                            variants={{
+                                hidden: { opacity: 0, scale: 0.9, y: 20 },
+                                visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+                            }}
+                            whileHover={{ y: -8, boxShadow: `0 10px 40px -10px var(--cyber-accent)` }}
                             className="cyber-box"
                             style={{
-                                padding: '25px',
-                                transition: 'all 0.3s'
+                                padding: '30px',
+                                transition: 'all 0.3s cubic-bezier(0.19, 1, 0.22, 1)'
                             }}
                         >
-                            {/* Replaced image with a cyber placeholder or grid if image fails, but keeping image logic for now */}
-                            <h3 style={{ fontSize: '20px', marginBottom: '15px', color: '#fff' }}>{p.title}</h3>
+                            <h3 style={{ fontSize: '20px', marginBottom: '15px', color: '#fff', letterSpacing: '1px' }}>{p.title}</h3>
                             <p style={{ fontSize: '14px', color: 'rgba(226, 232, 240, 0.8)', marginBottom: '25px', lineHeight: '1.6', minHeight: '100px' }}>{p.desc}</p>
                             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                                 {p.tech.map(t => (
-                                    <span key={t} style={{ fontSize: '10px', fontFamily: 'JetBrains Mono', color: 'var(--cyber-accent)', background: 'rgba(204, 255, 0, 0.1)', padding: '4px 10px', borderRadius: '2px' }}>
+                                    <span key={t} style={{ fontSize: '10px', fontFamily: 'JetBrains Mono', color: 'var(--cyber-accent)', border: '1px solid var(--cyber-accent)', padding: '4px 10px', borderRadius: '1px' }}>
                                         {t}
                                     </span>
                                 ))}
                             </div>
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
                 <div style={{ marginTop: '50px', textAlign: 'center' }}>
                     <a href="https://github.com" target="_blank" rel="noreferrer" className="outline-btn" style={{ borderColor: 'var(--cyber-accent)', color: 'var(--cyber-accent)' }}>
                         EXPLORE_MORE_DATA

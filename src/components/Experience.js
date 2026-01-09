@@ -74,15 +74,28 @@ const Experience = () => {
                             ))}
                         </div>
                         <div>
-                            <h3 style={{ fontSize: '20px', color: 'var(--cyber-text)', marginBottom: '5px' }}>{experiences[selected].role}</h3>
-                            <p style={{ fontSize: '12px', marginBottom: '20px', color: 'var(--cyber-accent)', opacity: 0.7, fontFamily: 'JetBrains Mono' }}>{`STARDATE: ${experiences[selected].range}`}</p>
-                            <div style={{ fontSize: '15px', lineHeight: '1.5', color: 'var(--cyber-text)' }}>
-                                {experiences[selected].logs.map((log, i) => (
-                                    <p key={i} style={{ marginBottom: '12px', display: 'flex' }}>
-                                        <span style={{ marginRight: '15px', color: 'var(--cyber-accent)', fontFamily: 'JetBrains Mono' }}>0x0{i + 1}</span>{log}
-                                    </p>
-                                ))}
-                            </div>
+                            <motion.div
+                                key={selected}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.4 }}
+                            >
+                                <h3 style={{ fontSize: '20px', color: 'var(--cyber-text)', marginBottom: '5px' }}>{experiences[selected].role}</h3>
+                                <p style={{ fontSize: '12px', marginBottom: '20px', color: 'var(--cyber-accent)', opacity: 0.7, fontFamily: 'JetBrains Mono' }}>{`STARDATE: ${experiences[selected].range}`}</p>
+                                <div style={{ fontSize: '15px', lineHeight: '1.5', color: 'var(--cyber-text)' }}>
+                                    {experiences[selected].logs.map((log, i) => (
+                                        <motion.p
+                                            key={i}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: i * 0.1 }}
+                                            style={{ marginBottom: '12px', display: 'flex' }}
+                                        >
+                                            <span style={{ marginRight: '15px', color: 'var(--cyber-accent)', fontFamily: 'JetBrains Mono' }}>0x0{i + 1}</span>{log}
+                                        </motion.p>
+                                    ))}
+                                </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
