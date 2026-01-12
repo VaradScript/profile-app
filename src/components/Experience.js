@@ -47,7 +47,7 @@ const Experience = () => {
             >
                 <div className="cyber-box">
                     <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--cyber-border)', paddingBottom: '10px' }}>
-                        <h2 style={{ fontSize: '18px', color: 'var(--cyber-accent)', fontFamily: 'JetBrains Mono' }}>[LOG_FILES/WORK_HISTORY]</h2>
+                        <h2 style={{ fontSize: '18px', color: 'var(--dojo-accent)', fontFamily: 'JetBrains Mono' }}>[LOG_FILES/WORK_HISTORY]</h2>
                         <span style={{ fontSize: '12px', opacity: 0.6, fontFamily: 'JetBrains Mono' }}>VARAD_OS_KERNEL_v1.0</span>
                     </div>
 
@@ -58,9 +58,9 @@ const Experience = () => {
                                     key={i}
                                     onClick={() => setSelected(i)}
                                     style={{
-                                        background: selected === i ? 'var(--cyber-accent)' : 'transparent',
-                                        color: selected === i ? 'black' : 'var(--cyber-accent)',
-                                        border: '1px solid var(--cyber-accent)',
+                                        background: selected === i ? 'var(--dojo-accent)' : 'transparent',
+                                        color: selected === i ? 'black' : 'var(--dojo-accent)',
+                                        border: '1px solid var(--dojo-accent)',
                                         padding: '10px 15px',
                                         textAlign: 'left',
                                         fontFamily: 'JetBrains Mono',
@@ -81,7 +81,7 @@ const Experience = () => {
                                 transition={{ duration: 0.4 }}
                             >
                                 <h3 style={{ fontSize: '20px', color: 'var(--cyber-text)', marginBottom: '5px' }}>{experiences[selected].role}</h3>
-                                <p style={{ fontSize: '12px', marginBottom: '20px', color: 'var(--cyber-accent)', opacity: 0.7, fontFamily: 'JetBrains Mono' }}>{`STARDATE: ${experiences[selected].range}`}</p>
+                                <p style={{ fontSize: '12px', marginBottom: '20px', color: 'var(--dojo-accent)', opacity: 0.7, fontFamily: 'JetBrains Mono' }}>{`STARDATE: ${experiences[selected].range}`}</p>
                                 <div style={{ fontSize: '15px', lineHeight: '1.5', color: 'var(--cyber-text)' }}>
                                     {experiences[selected].logs.map((log, i) => (
                                         <motion.p
@@ -91,7 +91,7 @@ const Experience = () => {
                                             transition={{ delay: i * 0.1 }}
                                             style={{ marginBottom: '12px', display: 'flex' }}
                                         >
-                                            <span style={{ marginRight: '15px', color: 'var(--cyber-accent)', fontFamily: 'JetBrains Mono' }}>0x0{i + 1}</span>{log}
+                                            <span style={{ marginRight: '15px', color: 'var(--dojo-accent)', fontFamily: 'JetBrains Mono' }}>0x0{i + 1}</span>{log}
                                         </motion.p>
                                     ))}
                                 </div>

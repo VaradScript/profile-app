@@ -1,15 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Roboto+Condensed:wght@300;400;700&family=Noto+Sans+JP:wght@400;900&display=swap');
 
 :root {
-  /* Cyber Palette */
-  --cyber-bg: #050505;
-  --cyber-text: #f0f0f0;
-  --cyber-accent: #ccff00;
-  --cyber-dim: rgba(204, 255, 0, 0.1);
-  --cyber-border: rgba(204, 255, 0, 0.3);
-  --glass-bg: rgba(10, 10, 10, 0.7);
-  --grid-color: rgba(204, 255, 0, 0.08);
-  --vignette-color: rgba(0, 164, 239, 0.12);
+  /* Kumite Palette (Aka vs Ao) */
+  --dojo-bg: #0a0a0a;
+  --dojo-text: #ECF0F1;
+
+  /* AKA (Red - Aggression/Attack) */
+  --kumite-aka: #E74C3C;
+  --aka-glow: rgba(231, 76, 60, 0.4);
+  --aka-gradient: linear-gradient(to right, var(--kumite-aka), transparent);
+
+  /* AO (Blue - Calm/Defense) */
+  --kumite-ao: #3498DB;
+  --ao-glow: rgba(52, 152, 219, 0.4);
+  --ao-gradient: linear-gradient(to right, var(--kumite-ao), transparent);
+
+  /* Default Accent (starts as Aka) */
+  --dojo-accent: var(--kumite-aka);
+
+  --glass-bg: rgba(10, 10, 10, 0.85);
+  --bg-gradient-1: #000000;
+  --bg-gradient-2: #1a1a1a;
 }
 
 * {
@@ -23,47 +34,67 @@ html,
 body,
 #root {
   height: 100%;
-  background: var(--cyber-bg);
-  color: var(--cyber-text);
-  font-family: 'Inter', sans-serif;
+  background: var(--dojo-bg);
+  background-image:
+    radial-gradient(circle at 50% 50%, #222 0%, #000 100%);
+  color: var(--dojo-text);
+  font-family: 'Roboto Condensed', sans-serif;
   overflow: hidden;
 }
+
+/* Removed gradient-shift animation */
 
 /* --- OVERLAYS --- */
 .noise-bg {
   position: fixed;
   inset: 0;
-  opacity: 0.05;
+  opacity: 0.03;
   z-index: 9997;
   pointer-events: none;
   background-image: url('https://grainy-gradients.vercel.app/noise.svg');
 }
 
-.vignette {
+/* Replaces CRT lines with a subtle paper texture appeal if needed, or clean */
+.dojo-texture {
+  /* Optional texture can go here */
   position: fixed;
   inset: 0;
-  box-shadow: inset 0 0 150px black, inset 0 0 100px var(--vignette-color);
-  z-index: 9996;
+  z-index: 9998;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYUM+s+AAAAHnRSTlMAAAAAAAABAgMEBQYHCAkKCwwNDxAREhMUFRYXGBkaGg+l0yIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAABTSURBVDjLY2AUYGBgZgACBhYmZhZWNnYODi5uHl4+fgFBIWEhUTFRMXEJSSlpGVk5eQBBJSUlFVU1dQ1NLW0dXT19A0MjYxNTM3NzcwsLC0s7OztnZ2cAAHh2D9122gQAAAAASUVORK5CYII=');
+  /* Subtle rice paper texture */
+  background-size: 100px 100px;
+  opacity: 0.05;
   pointer-events: none;
 }
 
-.crt-scanlines {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-  background-size: 100% 4px;
-  z-index: 9998;
-  pointer-events: none;
-}
+/* Removed scanline-move keyframe */
+/* Removed crt-checkered */
 
 /* --- TYPOGRAPHY --- */
 h1,
 h2,
-h3,
+h3 {
+  font-family: 'Potta One', cursive;
+  /* Brush style */
+  font-weight: 400;
+  /* Potta One is naturally bold */
+  letter-spacing: 2px;
+}
+
+.text-jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-weight: 900;
+  letter-spacing: 0.5rem;
+  line-height: 1;
+  user-select: none;
+}
+
 .mono-font {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Roboto Condensed', sans-serif;
   text-transform: uppercase;
-  letter-spacing: -0.05em;
+  letter-spacing: 1px;
 }
 
 /* --- APP LAYOUT --- */
@@ -71,22 +102,22 @@ h3,
   height: 100vh;
   overflow-y: auto;
   scroll-behavior: smooth;
-  background-image:
-    linear-gradient(var(--grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-  background-size: 50px 50px;
+  /* Removed grid background for cleaner look, added gradient in body */
   position: relative;
 }
 
 .hero-glow {
-  position: absolute;
-  top: 10%;
+  position: fixed;
+  /* Fixed so it moves with scroll or stays static? Actually fixed usually looks better for BG effects */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(204, 255, 0, 0.04) 0%, transparent 70%);
-  z-index: -1;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vh;
+  background: radial-gradient(circle, rgba(231, 76, 60, 0.15) 0%, transparent 70%);
+  /* Red Glow */
+  z-index: -2;
+  /* Behind particles */
   pointer-events: none;
 }
 
@@ -106,9 +137,10 @@ h3,
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  border: 1px solid var(--cyber-accent);
+  border: 1px solid var(--dojo-accent);
   padding: 6px;
-  box-shadow: 0 0 40px var(--cyber-dim);
+  box-shadow: 0 0 40px rgba(231, 76, 60, 0.1);
+  /* Using dojo-accent for dim */
   margin-bottom: 2rem;
 }
 
@@ -138,17 +170,17 @@ h3,
 .status-dot {
   width: 8px;
   height: 8px;
-  background: var(--cyber-accent);
+  background: var(--dojo-accent);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--cyber-accent);
+  box-shadow: 0 0 10px var(--dojo-accent);
 }
 
 .enter-btn {
   margin-top: 4rem;
   padding: 15px 50px;
   background: transparent;
-  border: 1px solid var(--cyber-accent);
-  color: var(--cyber-accent);
+  border: 1px solid var(--dojo-accent);
+  color: var(--dojo-accent);
   font-family: 'JetBrains Mono', monospace;
   font-weight: bold;
   letter-spacing: 3px;
@@ -157,9 +189,9 @@ h3,
 }
 
 .enter-btn:hover {
-  background: var(--cyber-accent);
+  background: var(--dojo-accent);
   color: black;
-  box-shadow: 0 0 30px var(--cyber-accent);
+  box-shadow: 0 0 30px var(--dojo-accent);
 }
 
 /* --- LOCK SCREEN (MOBILE) --- */
@@ -174,7 +206,7 @@ h3,
   align-items: center;
   justify-content: center;
   z-index: 10000;
-  color: white;
+  color: var(--dojo-text);
 }
 
 .lock-screen-blur {
@@ -230,22 +262,127 @@ h3,
 }
 
 /* --- STATUS BAR --- */
-.status-bar {
+/* --- DYNAMIC NOTCH (Legacy Status Bar replaced) --- */
+.notch-container {
   position: fixed;
-  top: 0;
+  top: 10px;
   left: 0;
   right: 0;
-  height: 28px;
-  background: rgba(0, 0, 0, 0.85);
-  border-bottom: 1px solid var(--cyber-border);
+  display: flex;
+  justify-content: center;
+  z-index: 20002;
+  pointer-events: none;
+  /* Let clicks pass through outside the notch */
+}
+
+.dynamic-notch {
+  background: black;
+  color: white;
+  pointer-events: auto;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.notch-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.notch-collapsed {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.notch-expanded {
+  width: 100%;
+  height: 100%;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.notch-row-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  z-index: 10002;
-  backdrop-filter: blur(10px);
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.notch-time-lg {
+  color: var(--dojo-accent);
+  font-weight: bold;
+}
+
+.notch-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notch-icon {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.notch-track-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+}
+
+.track-title {
+  color: white;
+  font-weight: 600;
+}
+
+.track-artist {
+  color: #666;
+  font-size: 0.7rem;
+}
+
+.notch-visualizer {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+  align-items: flex-end;
+  height: 20px;
+}
+
+.notch-visualizer .bar {
+  width: 3px;
+  background: var(--dojo-accent);
+  border-radius: 2px;
+}
+
+/* --- STILL ANIMATIONS --- */
+.float-anim {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+@keyframes float-y {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 /* --- MOBILE DOCK --- */
@@ -265,57 +402,38 @@ h3,
 }
 
 /* --- CURSOR --- */
-.cursor-main {
+/* --- NEW TRAIL CURSOR --- */
+.cursor-dot {
   position: fixed;
-  width: 20px;
-  height: 20px;
-  border: 1px solid var(--cyber-accent);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--dojo-accent);
+  /* Red Dot */
+  transform: rotate(45deg);
+  /* Diamond shape */
   pointer-events: none;
   z-index: 20000;
-  mix-blend-mode: exclusion;
+  margin-left: -6px;
+  margin-top: -6px;
+  box-shadow: 0 0 15px var(--dojo-accent);
 }
 
-.cursor-main.hover {
-  width: 50px;
-  height: 50px;
-  background-color: rgba(204, 255, 0, 0.1);
-  border-width: 2px;
-}
-
-.cursor-main.click {
-  width: 15px;
-  height: 15px;
-  background-color: var(--cyber-accent);
-}
-
-.cursor-main::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  background: var(--cyber-accent);
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  transition: transform 0.3s;
-}
-
-.cursor-main.hover::after {
-  transform: translate(-50%, -50%) scale(1.5);
-}
-
-.cursor-aura {
+.cursor-trail {
   position: fixed;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle, var(--cyber-accent) 0%, transparent 70%);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--dojo-accent);
+  background: rgba(231, 76, 60, 0.1);
+  transform: rotate(45deg);
   pointer-events: none;
   z-index: 19999;
+  margin-left: -12px;
+  margin-top: -12px;
+  transition: opacity 0.2s;
 }
 
 /* --- SECTIONS & ANIMATION --- */
@@ -363,11 +481,20 @@ h3,
 }
 
 .cyber-box {
-  background: rgba(10, 10, 10, 0.6);
-  border: 1px solid var(--cyber-border);
-  backdrop-filter: blur(12px);
+  background: rgba(18, 18, 18, 0.9);
+  border: 1px solid #333;
+  border-left: 3px solid var(--dojo-accent);
+  /* Red Left Border */
+  backdrop-filter: blur(10px);
   padding: 3rem;
   position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cyber-box:hover {
+  box-shadow: 0 15px 40px rgba(231, 76, 60, 0.2);
+  border-color: var(--dojo-accent);
 }
 
 .big-heading {
@@ -377,8 +504,10 @@ h3,
 }
 
 .accent-text {
-  color: var(--cyber-accent);
-  font-family: 'JetBrains Mono', monospace;
+  color: var(--dojo-accent);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
   font-size: 1.1rem;
 }
 
@@ -394,23 +523,82 @@ h3,
   .cursor-main {
     display: none !important;
   }
+
+  .hero-visual {
+    display: none !important;
+  }
 }
 
-.shimmer {
-  background: linear-gradient(90deg, #444 0%, #fff 50%, #444 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer-anim 2.5s infinite linear;
+/* --- COMPONENT UTILS --- */
+.tech-tag {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--cyber-accent);
+  border: 1px solid var(--cyber-accent);
+  padding: 4px 8px;
+  border-radius: 2px;
+  background: rgba(204, 255, 0, 0.05);
 }
 
-@keyframes shimmer-anim {
-  0% {
-    background-position: -100% 0;
-  }
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 20002;
+}
 
-  100% {
-    background-position: 100% 0;
-  }
+.modal-container-wrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20003;
+  pointer-events: none;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 600px;
+  background: black;
+  /* Or very dark grey */
+  border: 1px solid var(--cyber-accent);
+  padding: 40px;
+  pointer-events: auto;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-btn {
+  padding: 12px 24px;
+  border: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: bold;
+  cursor: pointer !important;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.modal-btn.primary {
+  background: var(--cyber-accent);
+  color: black;
+}
+
+.modal-btn.primary:hover {
+  background: white;
+  box-shadow: 0 0 15px white;
+}
+
+.modal-btn.secondary {
+  background: transparent;
+  color: #888;
+  border: 1px solid #444;
+}
+
+.modal-btn.secondary:hover {
+  color: white;
+  border-color: white;
 }

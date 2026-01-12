@@ -16,7 +16,7 @@ const Contact = () => {
             >
                 <motion.div variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }} className="cyber-box">
                     <motion.h2 variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} style={{ marginBottom: '30px' }}>ESTABLISH_LINK</motion.h2>
-                    <motion.p variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} className="desc-text" style={{ fontSize: '20px', fontFamily: 'JetBrains Mono', color: 'var(--cyber-accent)' }}>
+                    <motion.p variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} className="desc-text" style={{ fontSize: '20px', fontFamily: 'JetBrains Mono', color: 'var(--dojo-accent)' }}>
                         SIGNAL STRENGTH: WEAK... <br />
                         RECIPIENT: VARAD@TERMINAL_7<br /><br />
                         DO YOU WISH TO TRANSMIT A MESSAGE TO THE MAINframe?

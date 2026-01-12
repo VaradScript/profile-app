@@ -34,7 +34,7 @@ const LoginScreen = ({ onEnter }) => {
 
                 <motion.button
                     className="enter-btn"
-                    whileHover={{ scale: 1.05, boxShadow: '0 0 20px var(--cyber-accent)' }}
+                    whileHover={{ scale: 1.05, boxShadow: '0 0 20px var(--dojo-accent)' }}
                     whileTap={{ scale: 0.95 }}
                     onClick={onEnter}
                     initial={{ opacity: 0 }}
