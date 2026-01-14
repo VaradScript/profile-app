@@ -26,106 +26,102 @@ const Hero = () => {
         return () => clearTimeout(timer);
     }, [text, isDeleting, loopNum, typingSpeed, phrases]);
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.3
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, x: -20 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } }
-    };
-
     return (
-        <section className="section-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '50px', flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
+        <section className="section-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '30px', flexWrap: 'wrap', position: 'relative', zIndex: 1, padding: '80px 40px' }}>
+            {/* Background Strike Line (Ambient) */}
+            <motion.div
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: '100%', opacity: 0.15 }}
+                transition={{ delay: 1, duration: 1 }}
+                style={{ position: 'absolute', top: '22%', left: 0, height: '1px', background: 'var(--dojo-accent)', zIndex: -1 }}
+            />
+
             <motion.div
                 className="cyber-box"
-                initial="hidden"
-                animate="visible"
-                variants={containerVariants}
-                style={{ flex: 1, minWidth: '300px', background: 'transparent', border: 'none', boxShadow: 'none' }}
+                initial={{ opacity: 0, x: -60 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                style={{ flex: 1, minWidth: '300px', background: 'rgba(0,0,0,0.6)', borderRadius: '0 20px 0 20px', padding: '2rem' }}
             >
-                <motion.div
-                    variants={itemVariants}
-                    style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', fontFamily: 'Roboto Condensed', fontSize: '14px', color: '#888', letterSpacing: '2px' }}
+                <div
+                    style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontFamily: 'Roboto Condensed', fontSize: '11px', color: '#555', letterSpacing: '5px' }}
                 >
-                    <span>ID: VARAD-SENSEI</span>
-                    <span style={{ color: 'var(--dojo-accent)' }}>● DOJO OPEN</span>
-                </motion.div>
+                    <span>VARAD_SENSEI.sys</span>
+                    <span style={{ color: 'var(--dojo-accent)', textShadow: '0 0 10px var(--dojo-accent)' }}>● [ONLINE]</span>
+                </div>
 
-                <motion.span variants={itemVariants} className="accent-text" style={{ fontFamily: 'Potta One' }}>&gt; Welcome Warrior. I am</motion.span>
-                <motion.h1 variants={itemVariants} className="big-heading glitch" data-text="Varad." style={{ fontFamily: 'Potta One', color: 'white', textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>Varad.</motion.h1>
-                <motion.h2 variants={itemVariants} className="medium-heading" style={{ fontSize: '2rem', marginBottom: '1rem', color: '#ccc' }}>
-                    I Master {text}<span className="typewriter-cursor" style={{ background: 'var(--dojo-accent)' }}> </span>
+                <motion.span className="accent-text" style={{ fontFamily: 'Potta One', fontSize: '0.9rem', letterSpacing: '2px', opacity: 0.8 }}>// Syncing Aura...</motion.span>
+                <motion.h1 className="big-heading glitch" data-text="Varad." style={{ fontFamily: 'Potta One', color: 'white', fontSize: '3.5rem', margin: '5px 0', textShadow: '0 0 15px rgba(255,255,255,0.1)' }}>Varad.</motion.h1>
+                <motion.h2 className="medium-heading" style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#ddd', fontWeight: 300 }}>
+                    Master of {text}<span className="typewriter-cursor" style={{ background: 'var(--dojo-accent)' }}> </span>
                 </motion.h2>
-                <motion.p variants={itemVariants} className="desc-text" style={{ maxWidth: '500px', lineHeight: '1.6', color: '#aaa', fontSize: '1.1rem' }}>
-                    Black Belt Developer & Code Sensei. Disciplined in the art of Full Stack, creating powerful, swift, and honorable web experiences.
+                <motion.p className="desc-text" style={{ maxWidth: '420px', lineHeight: '1.5', color: '#999', fontSize: '0.95rem', fontWeight: 300 }}>
+                    Disciplined Full-Stack Architect. Every line is a strike. Every project, a perfected kata.
                 </motion.p>
-                <motion.div variants={itemVariants} style={{ marginTop: '30px', display: 'flex', gap: '20px' }}>
-                    <a href="#section-projects" className="outline-btn" style={{ padding: '12px 30px', border: '2px solid var(--dojo-accent)', color: 'white', background: 'var(--dojo-accent)', textDecoration: 'none', fontFamily: 'Roboto Condensed', fontWeight: 'bold' }}>VIEW TECHNIQUES</a>
-                    <a href="#section-contact" className="outline-btn" style={{ padding: '12px 30px', border: '2px solid #fff', color: '#fff', textDecoration: 'none', fontFamily: 'Roboto Condensed', fontWeight: 'bold' }}>BOW TO SENSEI</a>
+
+                <motion.div style={{ marginTop: '25px', display: 'flex', gap: '12px' }}>
+                    <a href="#section-projects" className="outline-btn" style={{ padding: '10px 22px', border: '1px solid var(--dojo-accent)', color: 'white', background: 'var(--dojo-accent)', textDecoration: 'none', fontFamily: 'Roboto Condensed', fontSize: '12px', fontWeight: 'bold', letterSpacing: '2px', borderRadius: '4px' }}>EXECUTE_KATA</a>
+                    <a href="#section-contact" className="outline-btn" style={{ padding: '10px 22px', border: '1px solid #fff', color: '#fff', textDecoration: 'none', fontFamily: 'Roboto Condensed', fontSize: '12px', fontWeight: 'bold', letterSpacing: '2px', borderRadius: '4px' }}>SENSEI_ACCESS</a>
                 </motion.div>
             </motion.div>
 
             <motion.div
-                className="hero-visual float-anim"
+                className="hero-visual"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
+                transition={{ delay: 0.6, duration: 1 }}
                 style={{
-                    width: '300px',
-                    height: '420px',
-                    background: 'rgba(0,0,0,0.2)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    width: '260px',
+                    height: '350px',
+                    background: 'rgba(255,255,255,0.01)',
+                    backdropFilter: 'blur(50px)',
+                    border: '1px solid rgba(255,255,255,0.05)',
                     position: 'relative',
                     borderRadius: '20px',
                     overflow: 'hidden',
+                    boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
+                    flexShrink: 0
                 }}
             >
-                {/* Responsive Hack: Use a class to hide on mobile if needed, or rely on flex-wrap */}
-                <div style={{ padding: '20px', fontFamily: 'Roboto Condensed', fontSize: '1rem', color: '#eee' }}>
-                    <div style={{ borderBottom: '2px solid var(--dojo-accent)', paddingBottom: '10px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>COMBAT_STATS</span>
-                        <div style={{ width: '10px', height: '10px', background: 'var(--dojo-accent)', borderRadius: '50%' }}></div>
+                <div style={{ padding: '20px', fontFamily: 'Roboto Condensed', color: '#eee' }}>
+                    <div style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '4px', opacity: 0.7 }}>SPIRIT_LVL</span>
+                        <div style={{ width: '6px', height: '6px', background: 'var(--dojo-accent)', borderRadius: '50%', boxShadow: '0 0 10px var(--dojo-accent)' }}></div>
                     </div>
-                    <div style={{ display: 'grid', gap: '20px' }}>
+                    <div style={{ display: 'grid', gap: '15px' }}>
                         {[
-                            { label: 'REACT STYLE', val: 95 },
-                            { label: 'BACKEND FIST', val: 88 },
-                            { label: 'FOCUS (DB)', val: 82 },
-                            { label: 'SPEED (PERF)', val: 90 }
+                            { label: 'REACTION', val: 95 },
+                            { label: 'STRIKE', val: 88 },
+                            { label: 'PRECISION', val: 92 },
+                            { label: 'ZEN', val: 99 }
                         ].map(skill => (
                             <div key={skill.label}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                                    <span>{skill.label}</span>
-                                    <span style={{ color: 'var(--dojo-accent)' }}>{skill.val}/100</span>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                    <span style={{ fontSize: '0.7rem', opacity: 0.5 }}>{skill.label}</span>
+                                    <span style={{ color: 'var(--dojo-accent)', fontWeight: 'bold', fontSize: '0.75rem' }}>{skill.val}%</span>
                                 </div>
-                                <div style={{ width: '100%', height: '8px', background: '#333', borderRadius: '4px' }}>
+                                <div style={{ width: '100%', height: '3px', background: 'rgba(255,255,255,0.03)', borderRadius: '1.5px', overflow: 'hidden' }}>
                                     <motion.div
                                         initial={{ width: 0 }}
                                         animate={{ width: `${skill.val}%` }}
-                                        transition={{ duration: 1.5, delay: 1 }}
-                                        style={{ height: '100%', background: 'var(--dojo-accent)', borderRadius: '4px' }}
+                                        transition={{ duration: 2, delay: 1 }}
+                                        style={{ height: '100%', background: `linear-gradient(90deg, var(--dojo-accent), transparent)` }}
                                     />
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div style={{ marginTop: '50px', textAlign: 'center', opacity: 0.8 }}>
-                        <div style={{ fontSize: '4rem', color: '#333', textShadow: '2px 2px 0 var(--dojo-accent)' }}>🥋</div>
+                    <div style={{ marginTop: '30px', textAlign: 'center' }}>
+                        <span style={{ fontSize: '0.55rem', color: '#333', letterSpacing: '5px' }}>RANK: [MOD_SENSEI]</span>
                     </div>
                 </div>
 
+                {/* Internal Scanline Effect */}
+                <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(231, 76, 60, 0.02), transparent)' }}></div>
+
                 {/* Decorative corners */}
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '20px', height: '20px', borderTop: '2px solid var(--dojo-accent)', borderLeft: '2px solid var(--dojo-accent)' }}></div>
-                <div style={{ position: 'absolute', bottom: 0, right: 0, width: '20px', height: '20px', borderBottom: '2px solid var(--dojo-accent)', borderRight: '2px solid var(--dojo-accent)' }}></div>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '15px', height: '15px', borderTop: '1px solid var(--dojo-accent)', borderLeft: '1px solid var(--dojo-accent)', borderRadius: '20px 0 0 0' }}></div>
+                <div style={{ position: 'absolute', bottom: 0, right: 0, width: '15px', height: '15px', borderBottom: '1px solid var(--dojo-accent)', borderRight: '1px solid var(--dojo-accent)', borderRadius: '0 0 20px 0' }}></div>
             </motion.div>
         </section>
     );

@@ -153,10 +153,28 @@ function App() {
 
       {!booting && (
         <>
+          {/* Transition Flash / Sensei's Gaze */}
+          <motion.div
+            initial={{ scaleY: 0, opacity: 1 }}
+            animate={{ scaleY: [0, 1, 0], opacity: [0, 1, 0] }}
+            transition={{ duration: 0.8, times: [0, 0.5, 1], ease: "anticipate" }}
+            style={{
+              position: 'fixed', inset: 0, zIndex: 11000,
+              background: 'white', transformOrigin: 'center'
+            }}
+          />
+
           {/* Global Overlays */}
           <div className="noise-bg"></div>
           <div className="crt-scanlines"></div>
           <div className="vignette"></div>
+
+          {/* Vertical Dojo Text (Traditional Look) */}
+          <div style={{ position: 'fixed', left: '2vw', top: '10vh', bottom: '10vh', width: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 5, opacity: 0.2 }}>
+            <span className="text-jp" style={{ fontSize: '1.5rem', color: theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)', writingMode: 'vertical-rl' }}>空手道場</span>
+            <div style={{ flex: 1, borderLeft: '1px solid currentColor', margin: '20px auto' }}></div>
+            <span className="text-jp" style={{ fontSize: '1.5rem', color: theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)', writingMode: 'vertical-rl' }}>精神一到</span>
+          </div>
 
           {/* Dynamic Backgrounds */}
           {appState === 'active' && <ParticlesBackground theme={theme} />}
@@ -180,9 +198,18 @@ function App() {
 
           {appState === 'active' && (
             <main className="dashboard-main">
+              {/* Floating Kanji floating behind sections */}
+              <motion.div
+                style={{ position: 'fixed', fontSize: '20vw', fontWeight: 'bold', color: 'rgba(255,255,255,0.02)', zIndex: 0, top: '20%', left: '10%', pointerEvents: 'none' }}
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 10, repeat: Infinity }}
+              >
+                武
+              </motion.div>
+
               {/* Section Indicator (Japanese) */}
               <div style={{ position: 'fixed', top: '50%', right: '20px', transform: 'translateY(-50%)', zIndex: 10 }}>
-                <span className="text-jp" style={{ fontSize: '2rem', color: theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)', opacity: 0.5, transition: 'color 0.5s' }}>
+                <span className="text-jp" style={{ fontSize: '2.5rem', color: theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)', opacity: 0.8, transition: 'color 0.5s', textShadow: `0 0 20px ${theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)'}` }}>
                   {activeSection === 'section-hero' && '英雄'}
                   {activeSection === 'section-about' && '自己'}
                   {activeSection === 'section-experience' && '経験'}
@@ -191,7 +218,7 @@ function App() {
                 </span>
               </div>
 
-              <div className="hero-glow" style={{ background: `radial-gradient(circle, ${theme === 'aka' ? 'rgba(231,76,60,0.15)' : 'rgba(52,152,219,0.15)'} 0%, transparent 70%)`, transition: 'background 1s' }}></div>
+              <div className="hero-glow" style={{ background: `radial-gradient(circle, ${theme === 'aka' ? 'rgba(231,76,60,0.2)' : 'rgba(52,152,219,0.2)'} 0%, transparent 70%)`, transition: 'background 1s' }}></div>
 
               {['section-hero', 'section-about', 'section-experience', 'section-works', 'section-contact'].map((sectionId, idx) => {
                 const Component = {

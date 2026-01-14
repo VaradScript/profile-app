@@ -46,9 +46,9 @@ const Experience = () => {
                 style={{ width: '100%', maxWidth: '900px' }}
             >
                 <div className="cyber-box">
-                    <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--cyber-border)', paddingBottom: '10px' }}>
-                        <h2 style={{ fontSize: '18px', color: 'var(--dojo-accent)', fontFamily: 'JetBrains Mono' }}>[LOG_FILES/WORK_HISTORY]</h2>
-                        <span style={{ fontSize: '12px', opacity: 0.6, fontFamily: 'JetBrains Mono' }}>VARAD_OS_KERNEL_v1.0</span>
+                    <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '15px' }}>
+                        <h2 style={{ fontSize: '22px', color: 'var(--dojo-accent)', fontFamily: 'Potta One', letterSpacing: '2px' }}>[BATTLE_HISTORY]</h2>
+                        <span style={{ fontSize: '13px', opacity: 0.6, fontFamily: 'Roboto Condensed', letterSpacing: '3px' }}>WARRIOR_PATH_TRACKER</span>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: '40px' }}>
@@ -58,18 +58,21 @@ const Experience = () => {
                                     key={i}
                                     onClick={() => setSelected(i)}
                                     style={{
-                                        background: selected === i ? 'var(--dojo-accent)' : 'transparent',
-                                        color: selected === i ? 'black' : 'var(--dojo-accent)',
-                                        border: '1px solid var(--dojo-accent)',
-                                        padding: '10px 15px',
+                                        background: selected === i ? 'var(--dojo-accent)' : 'rgba(255,255,255,0.02)',
+                                        color: selected === i ? 'black' : '#aaa',
+                                        border: selected === i ? '1px solid var(--dojo-accent)' : '1px solid rgba(255,255,255,0.1)',
+                                        padding: '12px 20px',
                                         textAlign: 'left',
-                                        fontFamily: 'JetBrains Mono',
-                                        fontSize: '13px',
-                                        transition: '0.2s',
-                                        cursor: 'none'
+                                        fontFamily: 'Roboto Condensed',
+                                        fontSize: '14px',
+                                        fontWeight: 'bold',
+                                        letterSpacing: '2px',
+                                        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                                        cursor: 'none',
+                                        borderRadius: '4px'
                                     }}
                                 >
-                                    {`${selected === i ? '>>' : '>'} ${exp.company}`}
+                                    {exp.company}
                                 </button>
                             ))}
                         </div>
@@ -80,18 +83,18 @@ const Experience = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.4 }}
                             >
-                                <h3 style={{ fontSize: '20px', color: 'var(--cyber-text)', marginBottom: '5px' }}>{experiences[selected].role}</h3>
-                                <p style={{ fontSize: '12px', marginBottom: '20px', color: 'var(--dojo-accent)', opacity: 0.7, fontFamily: 'JetBrains Mono' }}>{`STARDATE: ${experiences[selected].range}`}</p>
-                                <div style={{ fontSize: '15px', lineHeight: '1.5', color: 'var(--cyber-text)' }}>
+                                <h3 style={{ fontSize: '1.8rem', color: 'white', marginBottom: '8px', fontFamily: 'Potta One' }}>{experiences[selected].role}</h3>
+                                <p style={{ fontSize: '0.9rem', marginBottom: '25px', color: 'var(--dojo-accent)', fontWeight: 'bold', letterSpacing: '2px' }}>{`ERA: ${experiences[selected].range}`}</p>
+                                <div style={{ fontSize: '1.05rem', lineHeight: '1.7', color: '#ccc' }}>
                                     {experiences[selected].logs.map((log, i) => (
                                         <motion.p
                                             key={i}
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: i * 0.1 }}
-                                            style={{ marginBottom: '12px', display: 'flex' }}
+                                            style={{ marginBottom: '18px', display: 'flex' }}
                                         >
-                                            <span style={{ marginRight: '15px', color: 'var(--dojo-accent)', fontFamily: 'JetBrains Mono' }}>0x0{i + 1}</span>{log}
+                                            <span style={{ marginRight: '20px', color: 'var(--dojo-accent)', fontWeight: 'bold' }}>KATA_{i + 1}</span>{log}
                                         </motion.p>
                                     ))}
                                 </div>

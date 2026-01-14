@@ -17,10 +17,11 @@
 
   /* Default Accent (starts as Aka) */
   --dojo-accent: var(--kumite-aka);
+  --dojo-secondary: var(--kumite-ao);
 
-  --glass-bg: rgba(10, 10, 10, 0.85);
+  --glass-bg: rgba(5, 5, 5, 0.4);
   --bg-gradient-1: #000000;
-  --bg-gradient-2: #1a1a1a;
+  --bg-gradient-2: #050505;
 }
 
 * {
@@ -89,6 +90,7 @@ h3 {
   letter-spacing: 0.5rem;
   line-height: 1;
   user-select: none;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
 .mono-font {
@@ -477,19 +479,31 @@ h3 {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--cyber-accent);
+  background: var(--dojo-accent);
 }
 
 .cyber-box {
-  background: rgba(18, 18, 18, 0.9);
-  border: 1px solid #333;
-  border-left: 3px solid var(--dojo-accent);
-  /* Red Left Border */
-  backdrop-filter: blur(10px);
-  padding: 3rem;
+  background: var(--glass-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--dojo-accent);
+  /* Sumi-e brush edge simulation */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  padding: 3.5rem;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.cyber-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.02), transparent);
+  pointer-events: none;
 }
 
 .cyber-box:hover {
@@ -533,11 +547,12 @@ h3 {
 .tech-tag {
   font-size: 10px;
   font-family: 'JetBrains Mono', monospace;
-  color: var(--cyber-accent);
-  border: 1px solid var(--cyber-accent);
-  padding: 4px 8px;
-  border-radius: 2px;
-  background: rgba(204, 255, 0, 0.05);
+  color: var(--dojo-accent);
+  border: 1px solid var(--dojo-accent);
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  letter-spacing: 1px;
 }
 
 .modal-backdrop {
@@ -559,14 +574,13 @@ h3 {
 }
 
 .modal-content {
-  width: 90%;
-  max-width: 600px;
-  background: black;
-  /* Or very dark grey */
-  border: 1px solid var(--cyber-accent);
+  width: 95%;
+  max-width: 650px;
+  background: #050505;
+  border: 1px solid var(--dojo-accent);
   padding: 40px;
   pointer-events: auto;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 20px var(--dojo-glow);
   display: flex;
   flex-direction: column;
 }
@@ -583,13 +597,14 @@ h3 {
 }
 
 .modal-btn.primary {
-  background: var(--cyber-accent);
-  color: black;
+  background: var(--dojo-accent);
+  color: white;
 }
 
 .modal-btn.primary:hover {
   background: white;
-  box-shadow: 0 0 15px white;
+  color: black;
+  box-shadow: 0 0 20px white;
 }
 
 .modal-btn.secondary {
