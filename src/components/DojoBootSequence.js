@@ -6,27 +6,27 @@ const DojoBootSequence = ({ onComplete }) => {
     const [progress, setProgress] = useState(0);
 
     const weapons = [
-        { img: 'https://images.unsplash.com/photo-1517457373958-12123d8d5e13?w=200&auto=format&fit=crop', label: 'Katana' },
-        { img: 'https://images.unsplash.com/photo-1555597673-b21d5c935865?w=200&auto=format&fit=crop', label: 'Shuriken' },
-        { img: 'https://images.unsplash.com/photo-1599058917220-4389929286f3?w=200&auto=format&fit=crop', label: 'Nunchaku' },
-        { img: 'https://images.unsplash.com/photo-1511818234808-60be87e6714d?w=200&auto=format&fit=crop', label: 'Sai' }
+        { img: 'https://images.unsplash.com/photo-1517457373958-12123d8d5e13?w=400&auto=format&fit=crop', label: 'Katana' },
+        { img: 'https://images.unsplash.com/photo-1589492477829-5e65395b66cc?w=400&auto=format&fit=crop', label: 'Shuriken' },
+        { img: 'https://images.unsplash.com/photo-1601042879364-f39ae2703884?w=400&auto=format&fit=crop', label: 'Nunchaku' },
+        { img: 'https://images.unsplash.com/photo-1552072805-2a9039d00e57?w=400&auto=format&fit=crop', label: 'Sai' }
     ];
 
     useEffect(() => {
-        // Fast progress: 100 in 1 second
+        // Super fast progress: 100% in ~0.5 seconds
         const timer = setInterval(() => {
             setProgress(prev => {
                 if (prev >= 100) {
                     clearInterval(timer);
                     return 100;
                 }
-                return prev + 5;
+                return prev + 10;
             });
-        }, 50);
+        }, 30);
 
-        const s1 = setTimeout(() => setStep(1), 500);
-        const s2 = setTimeout(() => setStep(2), 1200);
-        const finish = setTimeout(() => onComplete(), 2000);
+        const s1 = setTimeout(() => setStep(1), 300);
+        const s2 = setTimeout(() => setStep(2), 800);
+        const finish = setTimeout(() => onComplete(), 1300);
 
         return () => {
             clearInterval(timer);

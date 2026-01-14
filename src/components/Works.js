@@ -50,26 +50,49 @@ const Works = () => {
                 <p style={{ color: 'var(--dojo-accent)', fontFamily: 'JetBrains Mono', fontSize: '14px' }}>SELECTED_REPOSITORY_DATA_v2</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+            <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={{
+                    visible: { transition: { staggerChildren: 0.1 } }
+                }}
+                style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}
+            >
                 {projects.map(item => (
                     <motion.div
                         layoutId={item.id}
                         key={item.id}
+                        variants={{
+                            hidden: { opacity: 0, y: 20 },
+                            visible: { opacity: 1, y: 0 }
+                        }}
                         onClick={() => setSelectedId(item.id)}
                         className="cyber-box project-card"
-                        whileHover={{ y: -10, boxShadow: '0 0 25px rgba(204, 255, 0, 0.2)' }}
-                        style={{ cursor: 'pointer' }}
+                        whileHover={{
+                            y: -10,
+                            scale: 1.02,
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--dojo-accent)',
+                            borderColor: 'var(--dojo-accent)'
+                        }}
+                        style={{
+                            cursor: 'pointer',
+                            background: 'rgba(255,255,255,0.02)',
+                            backdropFilter: 'blur(10px)',
+                            border: '1px solid rgba(255,255,255,0.1)',
+                            transition: 'border-color 0.3s'
+                        }}
                     >
-                        <motion.h3 style={{ color: 'white', marginBottom: '10px' }}>{item.title}</motion.h3>
-                        <motion.p style={{ color: '#aaa', fontSize: '0.9rem' }}>{item.desc}</motion.p>
-                        <div style={{ marginTop: '15px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                        <motion.h3 style={{ color: 'white', marginBottom: '10px', fontSize: '1.4rem' }}>{item.title}</motion.h3>
+                        <motion.p style={{ color: '#aaa', fontSize: '0.95rem', lineHeight: '1.4' }}>{item.desc}</motion.p>
+                        <div style={{ marginTop: '20px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                             {item.tech.slice(0, 3).map(t => (
-                                <span key={t} className="tech-tag">{t}</span>
+                                <span key={t} className="tech-tag" style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--dojo-accent)' }}>{t}</span>
                             ))}
                         </div>
+                        <div className="card-shine" />
                     </motion.div>
                 ))}
-            </div>
+            </motion.div>
 
             <div style={{ marginTop: '50px', textAlign: 'center' }}>
                 <a href="https://github.com/VaradScript" target="_blank" rel="noreferrer" className="outline-btn" style={{ borderColor: 'var(--dojo-accent)', color: 'var(--dojo-accent)' }}>

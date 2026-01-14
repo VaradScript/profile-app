@@ -23,7 +23,7 @@ function App() {
   // Custom Cursor Trail Logic
   const cursorRef = useRef(null);
   const trailRefs = useRef([]);
-  const trailCount = 8; // Number of trail dots
+  const trailCount = 12; // Increased for smoother liquid effect
 
   const [booting, setBooting] = useState(true); // New Boot State
   const [appState, setAppState] = useState('init');
@@ -234,15 +234,17 @@ const CursorTrailPoint = ({ index, target, theme }) => {
   useEffect(() => {
     let raf;
     const animate = () => {
-      const delay = (index + 1) * 2; // Physics delay factor
-      // Simple lerp
+      // Faster, more organic movement
+      const delay = (index + 1) * 1.5;
       const lx = pos.current.x + (target.x - pos.current.x) / delay;
       const ly = pos.current.y + (target.y - pos.current.y) / delay;
 
       pos.current = { x: lx, y: ly };
 
       if (ref.current) {
-        ref.current.style.transform = `translate3d(${lx}px, ${ly}px, 0) scale(${1 - index * 0.08})`;
+        // Tapering scale with a "liquid" stretch feel
+        const scale = Math.max(0, 1 - index * 0.05);
+        ref.current.style.transform = `translate3d(${lx}px, ${ly}px, 0) scale(${scale})`;
       }
       raf = requestAnimationFrame(animate);
     };
@@ -250,10 +252,20 @@ const CursorTrailPoint = ({ index, target, theme }) => {
     return () => cancelAnimationFrame(raf);
   }, [target, index]);
 
-  // Trail color mixing
   const color = theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)';
 
-  return <div ref={ref} className="cursor-trail" style={{ opacity: 0.6 - index * 0.05, borderColor: color, background: `color-mix(in srgb, ${color} 20%, transparent)` }} />;
+  return <div
+    ref={ref}
+    className="cursor-trail"
+    style={{
+      opacity: 0.8 - index * 0.04,
+      borderColor: color,
+      background: `color-mix(in srgb, ${color} ${Math.max(10, 50 - index * 5)}%, transparent)`,
+      width: `${12 - index * 0.5}px`,
+      height: `${12 - index * 0.5}px`,
+      boxShadow: index === 0 ? `0 0 15px ${color}` : 'none'
+    }}
+  />;
 };
 
 export default App;
