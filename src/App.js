@@ -16,6 +16,8 @@ import KumiteBackground from './components/KumiteBackground';
 import DojoBootSequence from './components/DojoBootSequence';
 
 import InkCursor from './components/InkCursor';
+import HUDOverlay from './components/HUDOverlay';
+import ScrollKatana from './components/ScrollKatana';
 
 import './App.css';
 
@@ -138,6 +140,18 @@ function App() {
 
           {appState === 'login' && <LoginScreen onEnter={() => setAppState('active')} />}
           {appState === 'lock' && <LockScreen onUnlock={() => setAppState('active')} />}
+
+          {appState === 'active' && <ParticlesBackground theme={theme} />}
+          {appState === 'active' && <KumiteBackground theme={theme} />}
+
+          {/* New HUD Overlay */}
+          {appState === 'active' && <HUDOverlay theme={theme} />}
+
+          {/* New Scroll Katana Progress */}
+          {appState === 'active' && window.innerWidth > 768 && <ScrollKatana theme={theme} />}
+
+          {appState === 'active' && <StatusBar theme={theme} />}
+          {appState === 'active' && window.innerWidth <= 768 && <MobileDock activeSection={activeSection} />}
 
           {appState === 'active' && (
             <main className="dashboard-main">

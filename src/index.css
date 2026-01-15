@@ -1,23 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Roboto+Condensed:wght@300;400;700&family=Noto+Sans+JP:wght@400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Roboto+Condensed:wght@300;400;700&family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
 
 :root {
-  /* Kumite Palette (Aka vs Ao) */
-  --dojo-bg: #0a0a0a;
-  --dojo-text: #ECF0F1;
+  /* AKA (Red) Theme - Power/Attack */
+  --kumite-aka: #e74c3c;
+  --aka-glow: rgba(231, 76, 60, 0.6);
 
-  /* AKA (Red - Aggression/Attack) */
-  --kumite-aka: #E74C3C;
-  --aka-glow: rgba(231, 76, 60, 0.4);
-  --aka-gradient: linear-gradient(to right, var(--kumite-aka), transparent);
+  /* AO (Blue) Theme - Speed/Defense */
+  --kumite-ao: #3498db;
+  --ao-glow: rgba(52, 152, 219, 0.6);
 
-  /* AO (Blue - Calm/Defense) */
-  --kumite-ao: #3498DB;
-  --ao-glow: rgba(52, 152, 219, 0.4);
-  --ao-gradient: linear-gradient(to right, var(--kumite-ao), transparent);
-
-  /* Default Accent (starts as Aka) */
+  /* Dynamic Variables */
   --dojo-accent: var(--kumite-aka);
-  --dojo-secondary: var(--kumite-ao);
+  --dojo-glow: var(--aka-glow);
+
+  --bg-dark: #050505;
+  --text-primary: #ededed;
 
   --glass-bg: rgba(5, 5, 5, 0.4);
   --bg-gradient-1: #000000;

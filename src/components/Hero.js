@@ -62,18 +62,18 @@ const Hero = () => {
                     <span style={{ color: 'var(--dojo-accent)', textShadow: '0 0 10px var(--dojo-accent)' }}>● [ONLINE]</span>
                 </div>
 
-                <motion.span className="accent-text" style={{ fontFamily: 'Potta One', fontSize: '0.9rem', letterSpacing: '2px', opacity: 0.8 }}>// Syncing Aura...</motion.span>
-                <motion.h1 className="big-heading glitch" data-text="Varad." style={{ fontFamily: 'Potta One', color: 'white', fontSize: '3.5rem', margin: '5px 0', textShadow: '0 0 15px rgba(255,255,255,0.1)' }}>Varad.</motion.h1>
-                <motion.h2 className="medium-heading" style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#ddd', fontWeight: 300 }}>
+                <motion.span className="accent-text" style={{ fontFamily: 'Potta One', fontSize: '1rem', letterSpacing: '3px', opacity: 0.8 }}>// Syncing Aura...</motion.span>
+                <motion.h1 className="big-heading glitch" data-text="Varad." style={{ fontFamily: 'Potta One', color: 'white', fontSize: '5rem', margin: '5px 0', textShadow: '0 0 25px rgba(255,255,255,0.15), 0 0 50px rgba(231,76,60,0.1)' }}>Varad.</motion.h1>
+                <motion.h2 className="medium-heading" style={{ fontSize: '1.8rem', marginBottom: '1.5rem', color: '#eee', fontWeight: 300 }}>
                     Master of {text}<span className="typewriter-cursor" style={{ background: 'var(--dojo-accent)' }}> </span>
                 </motion.h2>
-                <motion.p className="desc-text" style={{ maxWidth: '420px', lineHeight: '1.5', color: '#999', fontSize: '0.95rem', fontWeight: 300 }}>
+                <motion.p className="desc-text" style={{ maxWidth: '480px', lineHeight: '1.6', color: '#aaa', fontSize: '1.1rem', fontWeight: 300 }}>
                     Disciplined Full-Stack Architect. Every line is a strike. Every project, a perfected kata.
                 </motion.p>
 
-                <motion.div style={{ marginTop: '25px', display: 'flex', gap: '12px' }}>
-                    <a href="#section-projects" className="outline-btn" style={{ padding: '10px 22px', border: '1px solid var(--dojo-accent)', color: 'white', background: 'var(--dojo-accent)', textDecoration: 'none', fontFamily: 'Roboto Condensed', fontSize: '12px', fontWeight: 'bold', letterSpacing: '2px', borderRadius: '4px' }}>EXECUTE_KATA</a>
-                    <a href="#section-contact" className="outline-btn" style={{ padding: '10px 22px', border: '1px solid #fff', color: '#fff', textDecoration: 'none', fontFamily: 'Roboto Condensed', fontSize: '12px', fontWeight: 'bold', letterSpacing: '2px', borderRadius: '4px' }}>SENSEI_ACCESS</a>
+                <motion.div style={{ marginTop: '30px', display: 'flex', gap: '15px' }}>
+                    <a href="#section-projects" className="outline-btn" style={{ padding: '12px 28px', border: '1px solid var(--dojo-accent)', color: 'white', background: 'var(--dojo-accent)', textDecoration: 'none', fontFamily: 'Roboto Condensed', fontSize: '13px', fontWeight: 'bold', letterSpacing: '2px', borderRadius: '4px', textTransform: 'uppercase' }}>EXECUTE_KATA</a>
+                    <a href="#section-contact" className="outline-btn" style={{ padding: '12px 28px', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', textDecoration: 'none', fontFamily: 'Roboto Condensed', fontSize: '13px', fontWeight: 'bold', letterSpacing: '2px', borderRadius: '4px', textTransform: 'uppercase' }}>SENSEI_ACCESS</a>
                 </motion.div>
             </motion.div>
 
