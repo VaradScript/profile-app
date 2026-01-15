@@ -60,6 +60,36 @@ const KumiteBackground = ({ theme }) => {
                 />
             ))}
 
+            {/* Spirit Fog Particles */}
+            {[...Array(20)].map((_, i) => (
+                <motion.div
+                    key={`fog-${i}`}
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{
+                        x: [Math.random() * 100 - 50, Math.random() * 100 - 50],
+                        y: [0, -100],
+                        opacity: [0, 0.3, 0],
+                        scale: [0.5, 2]
+                    }}
+                    transition={{
+                        duration: Math.random() * 5 + 5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: Math.random() * 5
+                    }}
+                    style={{
+                        position: 'absolute',
+                        left: `${Math.random() * 100}%`,
+                        bottom: '-10%',
+                        width: '100px',
+                        height: '100px',
+                        background: theme === 'aka' ? 'radial-gradient(circle, var(--kumite-aka) 0%, transparent 70%)' : 'radial-gradient(circle, var(--kumite-ao) 0%, transparent 70%)',
+                        filter: 'blur(30px)',
+                        zIndex: -2
+                    }}
+                />
+            ))}
+
             <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'url("https://www.transparenttextures.com/patterns/handmade-paper.png")' }} />
 
             {/* AKA FIGHTER (Left) */}

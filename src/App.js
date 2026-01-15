@@ -15,34 +15,22 @@ import KumiteBackground from './components/KumiteBackground';
 // import KatanaSlash from './components/KatanaSlash'; // Import globally if we want it to run on appState change
 import DojoBootSequence from './components/DojoBootSequence';
 
+import InkCursor from './components/InkCursor';
+
 import './App.css';
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Custom Cursor Trail Logic
-  const cursorRef = useRef(null);
-  const trailRefs = useRef([]);
-  const trailCount = 12; // Increased for smoother liquid effect
-
   const [booting, setBooting] = useState(true); // New Boot State
-  const [appState, setAppState] = useState('init');
+  const [appState, setAppState] = useState('active'); // Default active for now
   const [activeSection, setActiveSection] = useState('section-hero');
   const [theme, setTheme] = useState('aka'); // 'aka' (red) or 'ao' (blue)
 
   useEffect(() => {
-    // Initial State
-    const isMobile = window.innerWidth <= 768;
-    setAppState(isMobile ? 'lock' : 'login');
-
-    // Mouse Tracking for custom cursor
+    // Mouse Tracking for custom interactions if needed
     const moveCursor = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-
-      // Main Cursor
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-      }
     };
 
     window.addEventListener('mousemove', moveCursor);
@@ -51,9 +39,6 @@ function App() {
 
   // Sync Theme with Section
   useEffect(() => {
-    // AKA SECTIONS: Hero, Experience (Odd)
-    // AO SECTIONS: About, Works (Even)
-    // Contact: Aka (Power finish)
     const themeMap = {
       'section-hero': 'aka',
       'section-about': 'ao',
@@ -75,43 +60,6 @@ function App() {
     }
 
   }, [activeSection]);
-
-  // Trail Animation Loop
-  useEffect(() => {
-    let animationFrame;
-
-    // Initialize trail positions
-    const trails = trailRefs.current;
-    const points = Array(trailCount).fill({ x: 0, y: 0 });
-
-    const animateTrail = () => {
-      let { x, y } = mousePosition;
-
-      trails.forEach((trail, index) => {
-        if (trail) {
-          // Ease logic
-          const prev = points[index];
-          const nextX = prev.x + (x - prev.x) * (0.4 - index * 0.03);
-          const nextY = prev.y + (y - prev.y) * (0.4 - index * 0.03);
-
-          trail.style.transform = `translate3d(${nextX}px, ${nextY}px, 0) scale(${1 - index * 0.1})`;
-
-          points[index] = { x: nextX, y: nextY };
-          // The next point chases the "current target", which we update to be THIS point for the NEXT trail segment? 
-          // Actually standard simple trail: subsequent points chase the mouse with more lag.
-          // Better implementation for "snake":
-          // We can just use the mousePosition global, but with different lerp factors.
-        }
-      });
-
-      animationFrame = requestAnimationFrame(animateTrail);
-    };
-    // animateTrail(); // Disabled manual loop to save cycles if using framer motion elsewhere, but let's keep it simple for now or use the CSS approach
-    // Actually the previous implementation logic was missing the ref assignment in the loop. 
-    // Let's rely on the separate component below which handles its own RAF.
-
-    return () => cancelAnimationFrame(animationFrame);
-  }, [mousePosition]);
 
 
   // Section Observer
@@ -153,6 +101,21 @@ function App() {
 
       {!booting && (
         <>
+
+          {/* Theme Transition Flash */}
+          <motion.div
+            key={theme}
+            initial={{ opacity: 0.3 }}
+            animate={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            style={{
+              position: 'fixed', inset: 0, zIndex: 12000,
+              background: theme === 'aka' ? 'radial-gradient(circle, var(--kumite-aka) 0%, transparent 80%)' : 'radial-gradient(circle, var(--kumite-ao) 0%, transparent 80%)',
+              mixBlendMode: 'overlay',
+              pointerEvents: 'none'
+            }}
+          />
+
           {/* Transition Flash / Sensei's Gaze */}
           <motion.div
             initial={{ scaleY: 0, opacity: 1 }}
@@ -166,32 +129,12 @@ function App() {
 
           {/* Global Overlays */}
           <div className="noise-bg"></div>
-          <div className="crt-scanlines"></div>
           <div className="vignette"></div>
 
-          {/* Vertical Dojo Text (Traditional Look) */}
-          <div style={{ position: 'fixed', left: '2vw', top: '10vh', bottom: '10vh', width: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 5, opacity: 0.2 }}>
-            <span className="text-jp" style={{ fontSize: '1.5rem', color: theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)', writingMode: 'vertical-rl' }}>空手道場</span>
-            <div style={{ flex: 1, borderLeft: '1px solid currentColor', margin: '20px auto' }}></div>
-            <span className="text-jp" style={{ fontSize: '1.5rem', color: theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)', writingMode: 'vertical-rl' }}>精神一到</span>
-          </div>
+          {/* New Ink Cursor */}
+          {window.innerWidth > 768 && <InkCursor theme={theme} />}
 
-          {/* Dynamic Backgrounds */}
-          {appState === 'active' && <ParticlesBackground theme={theme} />}
-          {appState === 'active' && <KumiteBackground theme={theme} />}
-
-          {appState === 'active' && <StatusBar theme={theme} />}
-          {appState === 'active' && window.innerWidth <= 768 && <MobileDock activeSection={activeSection} />}
-
-          {/* New "Liquid" Trail Cursor (Desktop Only) */}
-          {window.innerWidth > 768 && (
-            <>
-              <div ref={cursorRef} className="cursor-dot" style={{ background: theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)' }} />
-              {[...Array(trailCount)].map((_, i) => (
-                <CursorTrailPoint key={i} index={i} target={mousePosition} theme={theme} />
-              ))}
-            </>
-          )}
+          {/* Rest of the UI */}
 
           {appState === 'login' && <LoginScreen onEnter={() => setAppState('active')} />}
           {appState === 'lock' && <LockScreen onUnlock={() => setAppState('active')} />}
@@ -252,47 +195,5 @@ function App() {
     </div>
   );
 }
-
-// Sub-component for Trail Point with independent animation loop for performance
-const CursorTrailPoint = ({ index, target, theme }) => {
-  const ref = useRef(null);
-  const pos = useRef({ x: 0, y: 0 });
-
-  useEffect(() => {
-    let raf;
-    const animate = () => {
-      // Faster, more organic movement
-      const delay = (index + 1) * 1.5;
-      const lx = pos.current.x + (target.x - pos.current.x) / delay;
-      const ly = pos.current.y + (target.y - pos.current.y) / delay;
-
-      pos.current = { x: lx, y: ly };
-
-      if (ref.current) {
-        // Tapering scale with a "liquid" stretch feel
-        const scale = Math.max(0, 1 - index * 0.05);
-        ref.current.style.transform = `translate3d(${lx}px, ${ly}px, 0) scale(${scale})`;
-      }
-      raf = requestAnimationFrame(animate);
-    };
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
-  }, [target, index]);
-
-  const color = theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)';
-
-  return <div
-    ref={ref}
-    className="cursor-trail"
-    style={{
-      opacity: 0.8 - index * 0.04,
-      borderColor: color,
-      background: `color-mix(in srgb, ${color} ${Math.max(10, 50 - index * 5)}%, transparent)`,
-      width: `${12 - index * 0.5}px`,
-      height: `${12 - index * 0.5}px`,
-      boxShadow: index === 0 ? `0 0 15px ${color}` : 'none'
-    }}
-  />;
-};
 
 export default App;

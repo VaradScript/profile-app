@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 const Hero = () => {
     const [text, setText] = useState('');
@@ -7,6 +7,18 @@ const Hero = () => {
     const [loopNum, setLoopNum] = useState(0);
     const phrases = ["build things for the web.", "design digital experiences.", "engineer modern solutions."];
     const [typingSpeed, setTypingSpeed] = useState(150);
+
+    // 3D Tilt Logic
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+    const rotateX = useTransform(y, [-300, 300], [10, -10]);
+    const rotateY = useTransform(x, [-300, 300], [-10, 10]);
+
+    function handleMouse(event) {
+        const rect = event.currentTarget.getBoundingClientRect();
+        x.set(event.clientX - rect.left - rect.width / 2);
+        y.set(event.clientY - rect.top - rect.height / 2);
+    }
 
     useEffect(() => {
         const handleTyping = () => {
@@ -24,7 +36,7 @@ const Hero = () => {
         };
         const timer = setTimeout(handleTyping, typingSpeed);
         return () => clearTimeout(timer);
-    }, [text, isDeleting, loopNum, typingSpeed, phrases]);
+    }, [text, isDeleting, loopNum, typingSpeed]);
 
     return (
         <section className="section-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '30px', flexWrap: 'wrap', position: 'relative', zIndex: 1, padding: '80px 40px' }}>
@@ -73,55 +85,66 @@ const Hero = () => {
                 style={{
                     width: '260px',
                     height: '350px',
-                    background: 'rgba(255,255,255,0.01)',
-                    backdropFilter: 'blur(50px)',
-                    border: '1px solid rgba(255,255,255,0.05)',
-                    position: 'relative',
-                    borderRadius: '20px',
-                    overflow: 'hidden',
-                    boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
-                    flexShrink: 0
+                    perspective: 1000
                 }}
+                onMouseMove={handleMouse}
+                onMouseLeave={() => { x.set(0); y.set(0); }}
             >
-                <div style={{ padding: '20px', fontFamily: 'Roboto Condensed', color: '#eee' }}>
-                    <div style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '4px', opacity: 0.7 }}>SPIRIT_LVL</span>
-                        <div style={{ width: '6px', height: '6px', background: 'var(--dojo-accent)', borderRadius: '50%', boxShadow: '0 0 10px var(--dojo-accent)' }}></div>
-                    </div>
-                    <div style={{ display: 'grid', gap: '15px' }}>
-                        {[
-                            { label: 'REACTION', val: 95 },
-                            { label: 'STRIKE', val: 88 },
-                            { label: 'PRECISION', val: 92 },
-                            { label: 'ZEN', val: 99 }
-                        ].map(skill => (
-                            <div key={skill.label}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                                    <span style={{ fontSize: '0.7rem', opacity: 0.5 }}>{skill.label}</span>
-                                    <span style={{ color: 'var(--dojo-accent)', fontWeight: 'bold', fontSize: '0.75rem' }}>{skill.val}%</span>
+                <motion.div
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        background: 'rgba(255,255,255,0.01)',
+                        backdropFilter: 'blur(50px)',
+                        border: '1px solid rgba(255,255,255,0.05)',
+                        position: 'relative',
+                        borderRadius: '20px',
+                        overflow: 'hidden',
+                        boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
+                        rotateX: rotateX,
+                        rotateY: rotateY
+                    }}
+                >
+                    <div style={{ padding: '20px', fontFamily: 'Roboto Condensed', color: '#eee' }}>
+                        <div style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '4px', opacity: 0.7 }}>SPIRIT_LVL</span>
+                            <div style={{ width: '6px', height: '6px', background: 'var(--dojo-accent)', borderRadius: '50%', boxShadow: '0 0 10px var(--dojo-accent)' }}></div>
+                        </div>
+                        <div style={{ display: 'grid', gap: '15px' }}>
+                            {[
+                                { label: 'REACTION', val: 95 },
+                                { label: 'STRIKE', val: 88 },
+                                { label: 'PRECISION', val: 92 },
+                                { label: 'ZEN', val: 99 }
+                            ].map(skill => (
+                                <div key={skill.label}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                        <span style={{ fontSize: '0.7rem', opacity: 0.5 }}>{skill.label}</span>
+                                        <span style={{ color: 'var(--dojo-accent)', fontWeight: 'bold', fontSize: '0.75rem' }}>{skill.val}%</span>
+                                    </div>
+                                    <div style={{ width: '100%', height: '3px', background: 'rgba(255,255,255,0.03)', borderRadius: '1.5px', overflow: 'hidden' }}>
+                                        <motion.div
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${skill.val}%` }}
+                                            transition={{ duration: 2, delay: 1 }}
+                                            style={{ height: '100%', background: `linear-gradient(90deg, var(--dojo-accent), transparent)` }}
+                                        />
+                                    </div>
                                 </div>
-                                <div style={{ width: '100%', height: '3px', background: 'rgba(255,255,255,0.03)', borderRadius: '1.5px', overflow: 'hidden' }}>
-                                    <motion.div
-                                        initial={{ width: 0 }}
-                                        animate={{ width: `${skill.val}%` }}
-                                        transition={{ duration: 2, delay: 1 }}
-                                        style={{ height: '100%', background: `linear-gradient(90deg, var(--dojo-accent), transparent)` }}
-                                    />
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
+                        <div style={{ marginTop: '30px', textAlign: 'center' }}>
+                            <span style={{ fontSize: '0.55rem', color: '#333', letterSpacing: '5px' }}>RANK: [MOD_SENSEI]</span>
+                        </div>
                     </div>
-                    <div style={{ marginTop: '30px', textAlign: 'center' }}>
-                        <span style={{ fontSize: '0.55rem', color: '#333', letterSpacing: '5px' }}>RANK: [MOD_SENSEI]</span>
-                    </div>
-                </div>
 
-                {/* Internal Scanline Effect */}
-                <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(231, 76, 60, 0.02), transparent)' }}></div>
+                    {/* Internal Scanline Effect */}
+                    <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(231, 76, 60, 0.02), transparent)' }}></div>
 
-                {/* Decorative corners */}
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '15px', height: '15px', borderTop: '1px solid var(--dojo-accent)', borderLeft: '1px solid var(--dojo-accent)', borderRadius: '20px 0 0 0' }}></div>
-                <div style={{ position: 'absolute', bottom: 0, right: 0, width: '15px', height: '15px', borderBottom: '1px solid var(--dojo-accent)', borderRight: '1px solid var(--dojo-accent)', borderRadius: '0 0 20px 0' }}></div>
+                    {/* Decorative corners */}
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '15px', height: '15px', borderTop: '1px solid var(--dojo-accent)', borderLeft: '1px solid var(--dojo-accent)', borderRadius: '20px 0 0 0' }}></div>
+                    <div style={{ position: 'absolute', bottom: 0, right: 0, width: '15px', height: '15px', borderBottom: '1px solid var(--dojo-accent)', borderRight: '1px solid var(--dojo-accent)', borderRadius: '0 0 20px 0' }}></div>
+                </motion.div>
             </motion.div>
         </section>
     );
