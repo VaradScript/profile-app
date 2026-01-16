@@ -6,68 +6,78 @@ const About = () => {
         <section className="section-wrapper">
             <motion.div
                 className="cyber-box"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                style={{ width: '100%' }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                style={{ width: '100%', maxWidth: '1200px' }}
             >
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '40px' }}>
-                    <h2 style={{ fontSize: '32px', whiteSpace: 'nowrap' }}>
-                        <span style={{ color: 'var(--dojo-accent)', fontFamily: 'JetBrains Mono', fontSize: '20px', marginRight: '10px' }}>01.</span>
-                        Philosophy.zen
-                    </h2>
-                    <div style={{ height: '1px', width: '200px', backgroundColor: 'var(--dojo-accent)', opacity: 0.3, marginLeft: '20px' }}></div>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
+                    <div style={{ position: 'relative' }}>
+                        <h2 style={{ fontSize: '3rem', fontWeight: 700, letterSpacing: '-1px', color: 'white' }}>
+                            Philosophy
+                        </h2>
+                        <span style={{ position: 'absolute', top: '-15px', left: '0', fontSize: '0.7rem', fontFamily: 'JetBrains Mono', color: 'var(--dojo-accent)', letterSpacing: '4px' }}>01_ORIGIN</span>
+                    </div>
+                    <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(255,255,255,0.05)', marginLeft: '40px' }}></div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '60px', alignItems: 'center' }}>
-                    <motion.div>
-                        <motion.p className="desc-text" style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1.5rem', color: '#ccc' }}>
-                            I am <span style={{ color: 'var(--dojo-accent)', fontWeight: 'bold' }}>Varad</span>, a digital warrior dedicated to the mastery of code. My path is one of discipline, where every project is a Dojo and every challenge is a trial to sharpen my spirit.
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '80px', alignItems: 'start' }}>
+                    <div>
+                        <motion.p style={{ fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '2rem', color: 'white', fontWeight: 300 }}>
+                            I am <span style={{ color: 'var(--dojo-accent)', fontWeight: 500 }}>Varad</span>, an architect of digital realms where discipline meets innovation. My methodology is rooted in the precision of martial arts—every line of code is a calculate strike, every project a masterwork in evolution.
                         </motion.p>
-                        <motion.p className="desc-text" style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '2rem', color: '#aaa' }}>
-                            Whether crafting decentralized architectures or pixel-perfect frontends, I maintain a state of Mushin (No-Mind)—acting with instinctual precision to deliver systems that are as beautiful as they are functional.
+                        <motion.p style={{ fontSize: '1rem', lineHeight: '2', color: 'rgba(255,255,255,0.4)', fontWeight: 300, marginBottom: '40px' }}>
+                            Beyond syntax and architecture lies the essence of Mushin: acting without hesitation. I build systems that don't just function, but flow with instinctual grace, bridging the gap between complexity and clarity.
                         </motion.p>
 
-                        <div style={{ marginTop: '30px' }}>
-                            <h4 style={{ color: 'var(--dojo-accent)', fontSize: '0.9rem', letterSpacing: '3px', marginBottom: '20px' }}>// CURRENT_DISCIPLINES</h4>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '15px', listStyle: 'none', fontFamily: 'Roboto Condensed', fontSize: '16px', color: '#888' }}>
-                                {['React Mastery', 'Backend Fist (Node)', 'TypeScript Kata', 'System Architecture', 'UI/UX Ninjutsu', 'Performance Zen'].map(t => (
-                                    <div key={t} style={{ display: 'flex', alignItems: 'center' }}>
-                                        <span style={{ color: 'var(--dojo-accent)', marginRight: '12px', fontSize: '1.2rem' }}>⚔️</span>{t}
+                        <div style={{ marginTop: '50px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '30px' }}>
+                                <div style={{ width: '30px', height: '1px', background: 'var(--dojo-accent)' }}></div>
+                                <h4 style={{ color: 'white', fontSize: '0.8rem', letterSpacing: '5px', fontWeight: 700 }}>MASTERY_SET</h4>
+                            </div>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px 40px' }}>
+                                {['React Ecosystem', 'Node Performance', 'TypeScript Logic', 'Cloud Architecture', 'Interface Design', 'Core Engineering'].map(t => (
+                                    <div key={t} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '10px' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                                            <div style={{ width: '4px', height: '4px', background: 'var(--dojo-accent)', borderRadius: '50%' }}></div>
+                                            <span style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)', fontWeight: 300 }}>{t}</span>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        style={{ position: 'relative' }}
-                    >
+                    <div style={{ position: 'relative', justifySelf: 'center' }}>
                         <div style={{
-                            width: '320px', height: '400px',
-                            background: 'rgba(255,255,255,0.02)',
-                            border: '1px solid rgba(255,255,255,0.1)',
-                            borderRadius: '4px',
-                            overflow: 'hidden',
+                            width: '380px', height: '500px',
+                            background: 'rgba(255,255,255,0.01)',
+                            border: '1px solid rgba(255,255,255,0.05)',
+                            padding: '15px',
                             position: 'relative',
                             zIndex: 1
                         }}>
-                            <img
-                                src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop"
-                                alt="Sensei Spirit"
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) contrast(1.2) brightness(0.8)' }}
-                            />
-                            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0a0a0a, transparent)' }}></div>
-                            <div style={{ position: 'absolute', bottom: '20px', left: '20px', color: 'white', fontFamily: 'Potta One', fontSize: '1.5rem', textShadow: '0 0 10px rgba(0,0,0,0.5)' }}>武士道</div>
+                            <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
+                                <img
+                                    src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop"
+                                    alt="Sensei Spirit"
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) brightness(0.7)' }}
+                                />
+                                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-dark), transparent)' }}></div>
+                            </div>
+
+                            {/* Overlay Label */}
+                            <div style={{ position: 'absolute', bottom: '30px', left: '30px', right: '30px' }}>
+                                <div style={{ fontSize: '2rem', color: 'white', fontFamily: 'Potta One', marginBottom: '5px' }}>武士道</div>
+                                <div style={{ fontSize: '0.6rem', color: 'var(--dojo-accent)', letterSpacing: '5px', fontWeight: 700 }}>BUSHIDO_CODE</div>
+                            </div>
                         </div>
-                        {/* Decorative Frames */}
-                        <div style={{ position: 'absolute', top: '-10px', right: '-10px', width: '100px', height: '100px', borderTop: '2px solid var(--dojo-accent)', borderRight: '2px solid var(--dojo-accent)', zIndex: 0 }}></div>
-                        <div style={{ position: 'absolute', bottom: '-10px', left: '-10px', width: '100px', height: '100px', borderBottom: '2px solid var(--dojo-accent)', borderLeft: '2px solid var(--dojo-accent)', zIndex: 0 }}></div>
-                    </motion.div>
+
+                        {/* Premium White Framing */}
+                        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', borderTop: '1px solid white', borderRight: '1px solid white', opacity: 0.1 }}></div>
+                        <div style={{ position: 'absolute', bottom: '-20px', left: '-20px', width: '100px', height: '100px', borderBottom: '1px solid white', borderLeft: '1px solid white', opacity: 0.1 }}></div>
+                    </div>
                 </div>
             </motion.div>
         </section>

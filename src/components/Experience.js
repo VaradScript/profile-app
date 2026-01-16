@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const experiences = [
     {
@@ -40,66 +40,79 @@ const Experience = () => {
     return (
         <section className="section-wrapper">
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                style={{ width: '100%', maxWidth: '900px' }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                style={{ width: '100%', maxWidth: '1100px' }}
             >
-                <div className="cyber-box">
-                    <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '15px' }}>
-                        <h2 style={{ fontSize: '22px', color: 'var(--dojo-accent)', fontFamily: 'Potta One', letterSpacing: '2px' }}>[BATTLE_HISTORY]</h2>
-                        <span style={{ fontSize: '13px', opacity: 0.6, fontFamily: 'Roboto Condensed', letterSpacing: '3px' }}>WARRIOR_PATH_TRACKER</span>
+                <div style={{ marginBottom: '60px' }}>
+                    <div style={{ position: 'relative' }}>
+                        <h2 style={{ fontSize: '3rem', fontWeight: 700, color: 'white', letterSpacing: '-1px' }}>Timeline</h2>
+                        <span style={{ position: 'absolute', top: '-15px', left: '0', fontSize: '0.7rem', fontFamily: 'JetBrains Mono', color: 'var(--dojo-accent)', letterSpacing: '4px' }}>02_CHRONOLOGY</span>
                     </div>
+                </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: '40px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div className="cyber-box" style={{ padding: '0', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+                    <div style={{ borderRight: '1px solid rgba(255,255,255,0.05)', padding: '40px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                             {experiences.map((exp, i) => (
-                                <button
+                                <motion.button
                                     key={i}
                                     onClick={() => setSelected(i)}
+                                    whileHover={{ x: 10 }}
                                     style={{
-                                        background: selected === i ? 'var(--dojo-accent)' : 'rgba(255,255,255,0.02)',
-                                        color: selected === i ? 'black' : '#aaa',
-                                        border: selected === i ? '1px solid var(--dojo-accent)' : '1px solid rgba(255,255,255,0.1)',
-                                        padding: '12px 20px',
+                                        background: selected === i ? 'white' : 'transparent',
+                                        color: selected === i ? 'black' : 'rgba(255,255,255,0.4)',
+                                        border: '1px solid rgba(255,255,255,0.05)',
+                                        padding: '24px',
                                         textAlign: 'left',
-                                        fontFamily: 'Roboto Condensed',
-                                        fontSize: '14px',
+                                        fontFamily: 'JetBrains Mono',
+                                        fontSize: '12px',
                                         fontWeight: 'bold',
                                         letterSpacing: '2px',
-                                        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                                        cursor: 'none',
-                                        borderRadius: '4px'
+                                        transition: '0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                                        cursor: 'pointer',
+                                        borderRadius: '2px',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center'
                                     }}
                                 >
-                                    {exp.company}
-                                </button>
+                                    <span>{exp.company}</span>
+                                    {selected === i && <span style={{ color: 'var(--dojo-accent)' }}>●</span>}
+                                </motion.button>
                             ))}
                         </div>
-                        <div>
+                    </div>
+
+                    <div style={{ padding: '60px' }}>
+                        <AnimatePresence mode="wait">
                             <motion.div
                                 key={selected}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.4 }}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.5 }}
                             >
-                                <h3 style={{ fontSize: '1.8rem', color: 'white', marginBottom: '8px', fontFamily: 'Potta One' }}>{experiences[selected].role}</h3>
-                                <p style={{ fontSize: '0.9rem', marginBottom: '25px', color: 'var(--dojo-accent)', fontWeight: 'bold', letterSpacing: '2px' }}>{`ERA: ${experiences[selected].range}`}</p>
-                                <div style={{ fontSize: '1.05rem', lineHeight: '1.7', color: '#ccc' }}>
+                                <div style={{ marginBottom: '30px' }}>
+                                    <h3 style={{ fontSize: '2.2rem', color: 'white', fontWeight: 700, letterSpacing: '-0.5px', marginBottom: '10px' }}>{experiences[selected].role}</h3>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                                        <span style={{ fontSize: '0.8rem', color: 'var(--dojo-accent)', fontWeight: 700, letterSpacing: '3px', fontFamily: 'JetBrains Mono' }}>{experiences[selected].range}</span>
+                                        <div style={{ height: '1px', flex: 1, background: 'rgba(255,255,255,0.05)' }}></div>
+                                    </div>
+                                </div>
+
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                                     {experiences[selected].logs.map((log, i) => (
-                                        <motion.p
-                                            key={i}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: i * 0.1 }}
-                                            style={{ marginBottom: '18px', display: 'flex' }}
-                                        >
-                                            <span style={{ marginRight: '20px', color: 'var(--dojo-accent)', fontWeight: 'bold' }}>KATA_{i + 1}</span>{log}
-                                        </motion.p>
+                                        <div key={i} style={{ position: 'relative', paddingLeft: '40px' }}>
+                                            <div style={{ position: 'absolute', left: 0, top: '10px', width: '20px', height: '1px', background: 'rgba(255,255,255,0.2)' }}></div>
+                                            <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'rgba(255,255,255,0.5)', fontWeight: 300 }}>{log}</p>
+                                        </div>
                                     ))}
                                 </div>
                             </motion.div>
-                        </div>
+                        </AnimatePresence>
                     </div>
                 </div>
             </motion.div>

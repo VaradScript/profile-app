@@ -44,10 +44,15 @@ const Works = () => {
     const [selectedId, setSelectedId] = useState(null);
 
     return (
-        <section className="section-wrapper">
-            <div style={{ textAlign: 'left', marginBottom: '50px', borderLeft: '4px solid var(--dojo-accent)', paddingLeft: '20px' }}>
-                <h2 className="section-title" style={{ fontSize: '32px', letterSpacing: '2px' }}>[PROJECT_ARCHIVE]</h2>
-                <p style={{ color: 'var(--dojo-accent)', fontFamily: 'JetBrains Mono', fontSize: '14px' }}>SELECTED_REPOSITORY_DATA_v2</p>
+        <section className="section-wrapper" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+            <div style={{ marginBottom: '80px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '20px' }}>
+                <div style={{ position: 'relative' }}>
+                    <h2 style={{ fontSize: '3rem', fontWeight: 700, color: 'white', letterSpacing: '-1px' }}>Portfolio</h2>
+                    <span style={{ position: 'absolute', top: '-15px', left: '0', fontSize: '0.7rem', fontFamily: 'JetBrains Mono', color: 'var(--dojo-accent)', letterSpacing: '4px' }}>03_EXHIBITION</span>
+                </div>
+                <div style={{ textAlign: 'right', display: 'none', md: 'block' }}>
+                    <p style={{ color: 'rgba(255,255,255,0.2)', fontFamily: 'JetBrains Mono', fontSize: '10px', letterSpacing: '2px' }}>V_SCR_ARCHIVE // 2024</p>
+                </div>
             </div>
 
             <motion.div
@@ -56,49 +61,51 @@ const Works = () => {
                 variants={{
                     visible: { transition: { staggerChildren: 0.1 } }
                 }}
-                style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}
+                style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '40px' }}
             >
                 {projects.map(item => (
                     <motion.div
                         layoutId={item.id}
                         key={item.id}
                         variants={{
-                            hidden: { opacity: 0, y: 20 },
-                            visible: { opacity: 1, y: 0 }
+                            hidden: { opacity: 0, scale: 0.98 },
+                            visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
                         }}
                         onClick={() => setSelectedId(item.id)}
-                        className="cyber-box project-card"
+                        className="cyber-box"
                         whileHover={{
-                            y: -10,
-                            scale: 1.02,
-                            boxShadow: '0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--dojo-accent)',
-                            borderColor: 'var(--dojo-accent)'
+                            borderColor: 'white',
+                            backgroundColor: 'rgba(255,255,255,0.03)'
                         }}
                         style={{
                             cursor: 'pointer',
-                            background: 'rgba(255,255,255,0.02)',
-                            backdropFilter: 'blur(10px)',
-                            border: '1px solid rgba(255,255,255,0.1)',
-                            transition: 'border-color 0.3s'
+                            padding: '40px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            height: '100%',
+                            minHeight: '340px'
                         }}
                     >
-                        <motion.h3 style={{ color: 'white', marginBottom: '10px', fontSize: '1.4rem' }}>{item.title}</motion.h3>
-                        <motion.p style={{ color: '#aaa', fontSize: '0.95rem', lineHeight: '1.4' }}>{item.desc}</motion.p>
-                        <div style={{ marginTop: '20px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                            {item.tech.slice(0, 3).map(t => (
-                                <span key={t} className="tech-tag" style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--dojo-accent)' }}>{t}</span>
-                            ))}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '30px' }}>
+                            <div style={{ width: '40px', height: '1px', background: 'var(--dojo-accent)' }}></div>
+                            <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.2)', fontWeight: 700, fontFamily: 'JetBrains Mono' }}>REF_{item.id.toUpperCase()}</span>
                         </div>
-                        <div className="card-shine" />
+
+                        <motion.h3 style={{ color: 'white', marginBottom: '15px', fontSize: '1.8rem', fontWeight: 700, letterSpacing: '-0.5px' }}>{item.title}</motion.h3>
+                        <motion.p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '1rem', lineHeight: '1.6', flex: 1, fontWeight: 300 }}>{item.desc}</motion.p>
+
+                        <div style={{ marginTop: '40px', display: 'flex', gap: '20px', alignItems: 'center' }}>
+                            <div style={{ display: 'flex', gap: '10px' }}>
+                                {item.tech.slice(0, 2).map(t => (
+                                    <span key={t} style={{ fontSize: '0.65rem', color: 'white', border: '1px solid rgba(255,255,255,0.1)', padding: '4px 10px', fontWeight: 700, fontFamily: 'JetBrains Mono', letterSpacing: '1px' }}>{t}</span>
+                                ))}
+                            </div>
+                            <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.05)' }}></div>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--dojo-accent)' }}>↗</span>
+                        </div>
                     </motion.div>
                 ))}
             </motion.div>
-
-            <div style={{ marginTop: '50px', textAlign: 'center' }}>
-                <a href="https://github.com/VaradScript" target="_blank" rel="noreferrer" className="outline-btn" style={{ borderColor: 'var(--dojo-accent)', color: 'var(--dojo-accent)' }}>
-                    VIEW_GITHUB_PROFILE
-                </a>
-            </div>
 
             <AnimatePresence>
                 {selectedId && (
@@ -108,41 +115,56 @@ const Works = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             className="modal-backdrop"
+                            style={{ backgroundColor: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(15px)' }}
                             onClick={() => setSelectedId(null)}
                         />
                         <div className="modal-container-wrapper">
                             <motion.div
                                 layoutId={selectedId}
-                                className="cyber-box modal-content"
+                                className="cyber-box"
+                                style={{ width: '95%', maxWidth: '900px', padding: 0, border: '1px solid white', overflow: 'hidden', backgroundColor: 'var(--bg-dark)' }}
                             >
                                 {(() => {
                                     const item = projects.find(p => p.id === selectedId);
                                     return (
-                                        <>
-                                            <div style={{ height: '200px', overflow: 'hidden', borderRadius: '4px', marginBottom: '20px' }}>
-                                                <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))' }}>
+                                            <div style={{ height: '100%', minHeight: '400px', position: 'relative' }}>
+                                                <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) brightness(0.7)' }} />
+                                                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg-dark), transparent)' }}></div>
                                             </div>
-                                            <motion.h2 style={{ fontSize: '2rem', marginBottom: '10px' }}>{item.title}</motion.h2>
-                                            <motion.p style={{ color: '#ccc', lineHeight: '1.6', marginBottom: '20px' }}>{item.longDesc}</motion.p>
+                                            <div style={{ padding: '60px', display: 'flex', flexDirection: 'column' }}>
+                                                <span style={{ color: 'var(--dojo-accent)', fontWeight: 700, fontSize: '0.7rem', letterSpacing: '5px', marginBottom: '10px' }}>03_DATA_NODE</span>
+                                                <motion.h2 style={{ fontSize: '3rem', marginBottom: '20px', fontWeight: 700, color: 'white' }}>{item.title}</motion.h2>
+                                                <motion.p style={{ color: 'rgba(255,255,255,0.5)', lineHeight: '1.8', marginBottom: '40px', fontWeight: 300, fontSize: '1.1rem' }}>{item.longDesc}</motion.p>
 
-                                            <div style={{ marginBottom: '30px' }}>
-                                                <h4 style={{ color: 'var(--dojo-accent)', marginBottom: '10px', fontSize: '0.9rem' }}>// TECH_STACK</h4>
-                                                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                                                    {item.tech.map(t => (
-                                                        <span key={t} className="tech-tag" style={{ fontSize: '0.9rem', padding: '6px 12px' }}>{t}</span>
-                                                    ))}
+                                                <div style={{ marginBottom: '40px' }}>
+                                                    <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+                                                        {item.tech.map(t => (
+                                                            <span key={t} style={{ border: '1px solid rgba(255,255,255,0.1)', color: 'white', padding: '6px 15px', fontSize: '0.8rem', fontWeight: 400, fontFamily: 'JetBrains Mono' }}>{t}</span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                                <div style={{ display: 'flex', gap: '20px', marginTop: 'auto' }}>
+                                                    <motion.a
+                                                        whileHover={{ scale: 1.05 }}
+                                                        href={item.link}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        style={{ background: 'white', color: 'black', padding: '16px 30px', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.8rem', fontFamily: 'JetBrains Mono' }}
+                                                    >
+                                                        GIT_PULL
+                                                    </motion.a>
+                                                    <motion.button
+                                                        whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
+                                                        onClick={() => setSelectedId(null)}
+                                                        style={{ background: 'transparent', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', padding: '16px 30px', fontWeight: 'bold', fontSize: '0.8rem', fontFamily: 'JetBrains Mono', cursor: 'pointer' }}
+                                                    >
+                                                        TERMINATE_SESSION
+                                                    </motion.button>
                                                 </div>
                                             </div>
-
-                                            <div style={{ display: 'flex', gap: '20px', marginTop: 'auto' }}>
-                                                <a href={item.link} target="_blank" rel="noreferrer" className="modal-btn primary">
-                                                    VIEW_SOURCE
-                                                </a>
-                                                <button onClick={() => setSelectedId(null)} className="modal-btn secondary">
-                                                    CLOSE_INTFC
-                                                </button>
-                                            </div>
-                                        </>
+                                        </div>
                                     );
                                 })()}
                             </motion.div>

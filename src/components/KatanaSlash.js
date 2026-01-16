@@ -1,50 +1,68 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const KatanaSlash = () => {
+const KatanaSlash = ({ theme }) => {
     return (
-        <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9999 }}>
-            {/* AKA SLASH (Red) - Top Right to Bottom Left */}
+        <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 11000 }}>
+            {/* Ink Splash Layer */}
             <motion.div
-                style={{ position: 'absolute', inset: 0 }}
-                initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 0, 100% 0)' }}
-                animate={{ clipPath: 'polygon(150% -50%, -50% 150%, -60% 140%, 140% -60%)' }}
-                transition={{ duration: 0.4, ease: "circOut" }}
-            >
-                <div style={{ width: '100%', height: '100%', background: 'var(--kumite-aka)' }}></div>
-            </motion.div>
-
-            {/* AO SLASH (Blue) - Bottom Right to Top Left (Counter Cut) */}
-            <motion.div
-                style={{ position: 'absolute', inset: 0 }}
-                initial={{ clipPath: 'polygon(0 0, 0 0, 0 0, 0 0)' }}
-                animate={{ clipPath: 'polygon(-50% -50%, 150% 150%, 160% 140%, -40% -60%)' }}
-                transition={{ duration: 0.4, delay: 0.2, ease: "circOut" }}
-            >
-                <div style={{ width: '100%', height: '100%', background: 'var(--kumite-ao)' }}></div>
-            </motion.div>
-
-            {/* Final Flash */}
-            <motion.div
-                initial={{ opacity: 1 }}
-                animate={{ opacity: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                style={{ position: 'absolute', inset: 0, background: 'white' }}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: [0, 1, 0], scale: [0.5, 1.2, 1.5] }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                style={{
+                    position: 'absolute',
+                    top: '50%', left: '50%',
+                    width: '100vw', height: '100vw',
+                    background: `radial-gradient(circle, ${theme === 'aka' ? 'var(--kumite-aka)' : 'var(--kumite-ao)'} 0%, transparent 60%)`,
+                    transform: 'translate(-50%, -50%)',
+                    filter: 'blur(100px)',
+                    mixBlendMode: 'plus-lighter'
+                }}
             />
 
-            {/* SVG Lines for lingering visual */}
+            {/* Horizontal Slash */}
+            <motion.div
+                initial={{ scaleX: 0, opacity: 1 }}
+                animate={{ scaleX: [0, 1, 1, 0], opacity: [0, 1, 1, 0], x: ['-20%', '0%', '0%', '20%'] }}
+                transition={{ duration: 0.4, times: [0, 0.2, 0.8, 1], ease: "circIn" }}
+                style={{
+                    position: 'absolute',
+                    top: '45%', left: '0',
+                    width: '100%', height: '150px',
+                    background: theme === 'aka' ? 'var(--kumite-aka)' : 'white',
+                    transformOrigin: 'left',
+                    boxShadow: `0 0 100px ${theme === 'aka' ? 'var(--kumite-aka)' : 'var(--dojo-glow)'}`,
+                    clipPath: 'polygon(0 40%, 100% 0, 100% 100%, 0 60%)'
+                }}
+            />
+
+            {/* Vertical Slash */}
+            <motion.div
+                initial={{ scaleY: 0, opacity: 1 }}
+                animate={{ scaleY: [0, 1, 1, 0], opacity: [0, 1, 1, 0], y: ['-20%', '0%', '0%', '20%'] }}
+                transition={{ duration: 0.4, delay: 0.1, times: [0, 0.2, 0.8, 1], ease: "circIn" }}
+                style={{
+                    position: 'absolute',
+                    left: '50%', top: '0',
+                    width: '200px', height: '100%',
+                    background: theme === 'ao' ? 'var(--kumite-ao)' : 'white',
+                    transformOrigin: 'top',
+                    boxShadow: `0 0 100px ${theme === 'ao' ? 'var(--kumite-ao)' : 'var(--dojo-glow)'}`,
+                    clipPath: 'polygon(40% 0, 100% 100%, 0 100%, 60% 0)'
+                }}
+            />
+
+            {/* Ink Streak */}
             <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-                <motion.line
-                    x1="100%" y1="0%" x2="0%" y2="100%"
-                    stroke="var(--kumite-aka)" strokeWidth="2"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1, opacity: 0 }}
+                <motion.path
+                    d="M-50,150 Q500,50 1050,150"
+                    stroke="black"
+                    strokeWidth="40"
+                    fill="none"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: [0, 0.8, 0] }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                />
-                <motion.line
-                    x1="0%" y1="0%" x2="100%" y2="100%"
-                    stroke="var(--kumite-ao)" strokeWidth="2"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1, opacity: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+                    style={{ filter: 'blur(10px)' }}
                 />
             </svg>
         </div>

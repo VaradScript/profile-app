@@ -1,24 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Roboto+Condensed:wght@300;400;700&family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Roboto+Condensed:wght@300;400;700&family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700&family=Outfit:wght@200;400;700&display=swap');
 
 :root {
   /* AKA (Red) Theme - Power/Attack */
-  --kumite-aka: #e74c3c;
-  --aka-glow: rgba(231, 76, 60, 0.6);
+  --kumite-aka: #ff3c2d;
+  --aka-glow: rgba(255, 60, 45, 0.6);
+  --aka-soft: rgba(255, 60, 45, 0.1);
 
   /* AO (Blue) Theme - Speed/Defense */
-  --kumite-ao: #3498db;
-  --ao-glow: rgba(52, 152, 219, 0.6);
+  --kumite-ao: #00aaff;
+  --ao-glow: rgba(0, 170, 255, 0.6);
+  --ao-soft: rgba(0, 170, 255, 0.1);
+
+  /* Premium White Touch */
+  --premium-white: #ffffff;
+  --glass-white: rgba(255, 255, 255, 0.05);
+  --glass-white-border: rgba(255, 255, 255, 0.1);
+  --text-dim: rgba(255, 255, 255, 0.6);
 
   /* Dynamic Variables */
   --dojo-accent: var(--kumite-aka);
   --dojo-glow: var(--aka-glow);
 
-  --bg-dark: #050505;
-  --text-primary: #ededed;
-
-  --glass-bg: rgba(5, 5, 5, 0.4);
-  --bg-gradient-1: #000000;
-  --bg-gradient-2: #050505;
+  --bg-dark: #000000;
+  --text-primary: #ffffff;
 }
 
 * {
@@ -32,12 +36,12 @@ html,
 body,
 #root {
   height: 100%;
-  background: var(--dojo-bg);
-  background-image:
-    radial-gradient(circle at 50% 50%, #222 0%, #000 100%);
-  color: var(--dojo-text);
-  font-family: 'Roboto Condensed', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: 'Outfit', 'Roboto Condensed', sans-serif;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Removed gradient-shift animation */
@@ -107,17 +111,15 @@ h3 {
 
 .hero-glow {
   position: fixed;
-  /* Fixed so it moves with scroll or stays static? Actually fixed usually looks better for BG effects */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50vw;
-  height: 50vh;
-  background: radial-gradient(circle, rgba(231, 76, 60, 0.15) 0%, transparent 70%);
-  /* Red Glow */
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 80%);
   z-index: -2;
-  /* Behind particles */
   pointer-events: none;
+  transition: background 1s ease;
 }
 
 /* --- LOGIN SCREEN --- */
@@ -456,9 +458,12 @@ h3 {
 
 .section-wrapper {
   min-height: 100vh;
-  padding: 100px 40px;
-  max-width: 1200px;
+  padding: 120px 60px;
+  max-width: 1400px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Custom Scrollbar */
@@ -480,32 +485,22 @@ h3 {
 }
 
 .cyber-box {
-  background: var(--glass-bg);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-left: 4px solid var(--dojo-accent);
-  /* Sumi-e brush edge simulation */
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px);
-  padding: 3.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-white-border);
+  border-left: 2px solid var(--dojo-accent);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 0 80px rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(30px);
+  padding: 4rem;
   position: relative;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
-}
-
-.cyber-box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.02), transparent);
-  pointer-events: none;
+  border-radius: 4px;
 }
 
 .cyber-box:hover {
-  box-shadow: 0 15px 40px rgba(231, 76, 60, 0.2);
-  border-color: var(--dojo-accent);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.9), inset 0 0 100px rgba(255, 255, 255, 0.02);
+  transform: translateY(-5px);
 }
 
 .big-heading {
@@ -613,4 +608,36 @@ h3 {
 .modal-btn.secondary:hover {
   color: white;
   border-color: white;
+}
+
+/* --- PREMIUM OVERRIDES --- */
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
+  pointer-events: none;
+  z-index: 9996;
+}
+
+.outline-btn {
+  padding: 16px 36px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 11px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.outline-btn:hover {
+  background: white;
+  color: black;
+  border-color: white;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
 }

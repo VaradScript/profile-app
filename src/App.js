@@ -12,7 +12,8 @@ import MobileDock from './components/MobileDock';
 import ParticlesBackground from './components/ParticlesBackground';
 // import ShadowSensei from './components/ShadowSensei'; // Replaced by Kumite
 import KumiteBackground from './components/KumiteBackground';
-// import KatanaSlash from './components/KatanaSlash'; // Import globally if we want it to run on appState change
+import ShadowFightBackground from './components/ShadowFightBackground';
+import KatanaSlash from './components/KatanaSlash';
 import DojoBootSequence from './components/DojoBootSequence';
 
 import InkCursor from './components/InkCursor';
@@ -42,23 +43,26 @@ function App() {
   // Sync Theme with Section
   useEffect(() => {
     const themeMap = {
-      'section-hero': 'aka',
-      'section-about': 'ao',
-      'section-experience': 'aka',
-      'section-works': 'ao',
-      'section-contact': 'aka'
+      'section-hero': { color: 'var(--kumite-aka)', name: 'aka', vibe: 'aggressive' },
+      'section-about': { color: 'var(--kumite-ao)', name: 'ao', vibe: 'calm' },
+      'section-experience': { color: 'white', name: 'shiro', vibe: 'professional' },
+      'section-works': { color: 'var(--kumite-ao)', name: 'ao', vibe: 'creative' },
+      'section-contact': { color: 'var(--kumite-aka)', name: 'aka', vibe: 'final' }
     };
-    const newTheme = themeMap[activeSection] || 'aka';
-    setTheme(newTheme);
+
+    const config = themeMap[activeSection] || themeMap['section-hero'];
+    setTheme(config.name);
 
     // Update CSS Variables dynamically
     const root = document.documentElement;
-    if (newTheme === 'aka') {
-      root.style.setProperty('--dojo-accent', 'var(--kumite-aka)');
+    root.style.setProperty('--dojo-accent', config.color);
+
+    if (config.name === 'aka') {
       root.style.setProperty('--dojo-glow', 'var(--aka-glow)');
-    } else {
-      root.style.setProperty('--dojo-accent', 'var(--kumite-ao)');
+    } else if (config.name === 'ao') {
       root.style.setProperty('--dojo-glow', 'var(--ao-glow)');
+    } else {
+      root.style.setProperty('--dojo-glow', 'rgba(255,255,255,0.3)');
     }
 
   }, [activeSection]);
@@ -103,7 +107,7 @@ function App() {
 
       {!booting && (
         <>
-
+          <KatanaSlash key={activeSection} theme={theme} />
           {/* Theme Transition Flash */}
           <motion.div
             key={theme}
@@ -142,7 +146,7 @@ function App() {
           {appState === 'lock' && <LockScreen onUnlock={() => setAppState('active')} />}
 
           {appState === 'active' && <ParticlesBackground theme={theme} />}
-          {appState === 'active' && <KumiteBackground theme={theme} />}
+          {appState === 'active' && <ShadowFightBackground theme={theme} activeSection={activeSection} />}
 
           {/* New HUD Overlay */}
           {appState === 'active' && <HUDOverlay theme={theme} />}
@@ -157,11 +161,21 @@ function App() {
             <main className="dashboard-main">
               {/* Floating Kanji floating behind sections */}
               <motion.div
-                style={{ position: 'fixed', fontSize: '20vw', fontWeight: 'bold', color: 'rgba(255,255,255,0.02)', zIndex: 0, top: '20%', left: '10%', pointerEvents: 'none' }}
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 10, repeat: Infinity }}
+                key={activeSection}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 0.05, scale: 1, y: [0, -20, 0] }}
+                transition={{
+                  opacity: { duration: 2 },
+                  scale: { duration: 2 },
+                  y: { duration: 10, repeat: Infinity }
+                }}
+                style={{ position: 'fixed', fontSize: '30vw', fontWeight: 'bold', color: 'white', zIndex: 0, top: '20%', left: '10%', pointerEvents: 'none', fontFamily: 'Potta One' }}
               >
-                武
+                {activeSection === 'section-hero' && '武'}
+                {activeSection === 'section-about' && '道'}
+                {activeSection === 'section-experience' && '歴'}
+                {activeSection === 'section-works' && '作'}
+                {activeSection === 'section-contact' && '信'}
               </motion.div>
 
               {/* Section Indicator (Japanese) */}
@@ -196,9 +210,7 @@ function App() {
                     variants={revealVariants}
                     style={{ position: 'relative', zIndex: 1 }}
                   >
-                    <div className="section-wrapper">
-                      <Component />
-                    </div>
+                    <Component />
                   </motion.div>
                 );
               })}
