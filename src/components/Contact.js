@@ -46,7 +46,7 @@ const Contact = () => {
 
                 <div style={{ marginTop: '100px', display: 'flex', justifyContent: 'center', gap: '40px' }}>
                     {['X', 'INSTAGRAM', 'LINKEDIN', 'GITHUB'].map(social => (
-                        <a key={social} href="#" style={{ fontSize: '10px', color: 'rgba(255,255,255,0.2)', textDecoration: 'none', letterSpacing: '2px', fontWeight: 700, fontFamily: 'JetBrains Mono' }}>{social}</a>
+                        <a key={social} href="#!" style={{ fontSize: '10px', color: 'rgba(255,255,255,0.2)', textDecoration: 'none', letterSpacing: '2px', fontWeight: 700, fontFamily: 'JetBrains Mono' }}>{social}</a>
                     ))}
                 </div>
             </motion.div>

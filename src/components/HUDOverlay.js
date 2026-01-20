@@ -18,7 +18,7 @@ const HUDOverlay = ({ theme }) => {
             {/* Top Left: Frame */}
             <div style={{ position: 'absolute', top: '20px', left: '20px', borderTop: `2px solid ${color}`, borderLeft: `2px solid ${color}`, width: '40px', height: '40px', transition: 'border-color 0.5s' }} />
             <div style={{ position: 'absolute', top: '25px', left: '70px', fontFamily: 'JetBrains Mono', fontSize: '10px', color: color, letterSpacing: '2px', opacity: 0.8 }}>
-                // SYS.MONITOR_ACTIVE
+                {`// SYS.MONITOR_ACTIVE`}
             </div>
 
             {/* Top Right: Time & Status */}

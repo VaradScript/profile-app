@@ -12,7 +12,6 @@ import StatusBar from './components/StatusBar';
 import MobileDock from './components/MobileDock';
 import ParticlesBackground from './components/ParticlesBackground';
 // import ShadowSensei from './components/ShadowSensei'; // Replaced by Kumite
-import KumiteBackground from './components/KumiteBackground';
 import ShadowFightBackground from './components/ShadowFightBackground';
 import KatanaSlash from './components/KatanaSlash';
 import DojoBootSequence from './components/DojoBootSequence';
@@ -24,7 +23,7 @@ import ScrollKatana from './components/ScrollKatana';
 import './App.css';
 
 function App() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
 
   const [booting, setBooting] = useState(true); // New Boot State
   const [appState, setAppState] = useState('active'); // Default active for now

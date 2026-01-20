@@ -36,7 +36,7 @@ const Hero = () => {
         };
         const timer = setTimeout(handleTyping, typingSpeed);
         return () => clearTimeout(timer);
-    }, [text, isDeleting, loopNum, typingSpeed]);
+    }, [text, isDeleting, loopNum, typingSpeed, phrases]);
 
     return (
         <section className="section-wrapper" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '80px', flexWrap: 'wrap', position: 'relative', zIndex: 1, padding: '120px 5vw' }}>
@@ -54,7 +54,7 @@ const Hero = () => {
                     <span style={{ color: 'var(--dojo-accent)', fontWeight: 'bold' }}>● SYSTEM_ACTIVE</span>
                 </div>
 
-                <motion.span className="accent-text" style={{ fontSize: '0.9rem', letterSpacing: '8px', opacity: 0.5, fontWeight: 300 }}>// WELCOME_USER</motion.span>
+                <motion.span className="accent-text" style={{ fontSize: '0.9rem', letterSpacing: '8px', opacity: 0.5, fontWeight: 300 }}>{`// WELCOME_USER`}</motion.span>
                 <div style={{ position: 'relative' }}>
                     <motion.h1 className="big-heading shadow-text" style={{ color: 'white', fontSize: '15vh', lineHeight: '0.8', margin: '20px 0', fontWeight: 'bold', textShadow: '0 0 50px rgba(0,0,0,1), 0 0 100px var(--dojo-glow)' }}>Varad.</motion.h1>
                     <div style={{ position: 'absolute', top: '-20px', left: '-30px', fontSize: '6rem', color: 'rgba(255,255,255,0.03)', fontWeight: 'bold', pointerEvents: 'none', zIndex: -1 }}>SHADOW</div>
