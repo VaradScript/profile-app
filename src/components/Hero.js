@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 
+const phrases = ["build things for the web.", "design digital experiences.", "engineer modern solutions."];
+
 const Hero = () => {
     const [text, setText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);
-    const phrases = ["build things for the web.", "design digital experiences.", "engineer modern solutions."];
     const [typingSpeed, setTypingSpeed] = useState(150);
 
     // 3D Tilt Logic
@@ -36,7 +37,7 @@ const Hero = () => {
         };
         const timer = setTimeout(handleTyping, typingSpeed);
         return () => clearTimeout(timer);
-    }, [text, isDeleting, loopNum, typingSpeed, phrases]);
+    }, [text, isDeleting, loopNum, typingSpeed]);
 
     return (
         <section className="section-wrapper" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '80px', flexWrap: 'wrap', position: 'relative', zIndex: 1, padding: '120px 5vw' }}>
