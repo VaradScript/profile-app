@@ -35,11 +35,12 @@
 html,
 body,
 #root {
-  height: 100%;
+  min-height: 100%;
   background-color: var(--bg-dark);
   color: var(--text-primary);
   font-family: 'Outfit', 'Roboto Condensed', sans-serif;
-  overflow: hidden;
+  overflow: auto;
+  /* Fallback for no-js, Lenis will override if needed but needs scrollable content */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -103,10 +104,8 @@ h3 {
 /* --- APP LAYOUT --- */
 .App {
   min-height: 100vh;
-  /* Removed scroll-behavior to allow Lenis to handle it */
   position: relative;
-  overflow: hidden;
-  /* Lenis usually requires this or auto on body */
+  /* overflow: hidden; <- Removed to allow document scroll */
 }
 
 .hero-glow {
