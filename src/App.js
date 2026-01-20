@@ -30,15 +30,7 @@ function App() {
   const [activeSection, setActiveSection] = useState('section-hero');
   const [theme, setTheme] = useState('aka'); // 'aka' (red) or 'ao' (blue)
 
-  useEffect(() => {
-    // Mouse Tracking for custom interactions if needed
-    const moveCursor = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
 
-    window.addEventListener('mousemove', moveCursor);
-    return () => window.removeEventListener('mousemove', moveCursor);
-  }, []);
 
   // Initialize Lenis Smooth Scroll
   useEffect(() => {
