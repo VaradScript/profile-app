@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Roboto+Condensed:wght@300;400;700&family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700&family=Outfit:wght@200;400;700&display=swap');
+/* Google Fonts Import Moved to HTML Head for Performance */
 
 :root {
   /* AKA (Red) Theme - Power/Attack */
@@ -102,11 +102,11 @@ h3 {
 
 /* --- APP LAYOUT --- */
 .App {
-  height: 100vh;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  /* Removed grid background for cleaner look, added gradient in body */
+  min-height: 100vh;
+  /* Removed scroll-behavior to allow Lenis to handle it */
   position: relative;
+  overflow: hidden;
+  /* Lenis usually requires this or auto on body */
 }
 
 .hero-glow {
