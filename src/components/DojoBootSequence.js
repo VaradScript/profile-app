@@ -25,7 +25,7 @@ const DojoBootSequence = ({ onComplete }) => {
             </svg>
         );
 
-        // YUMI (Bow) -> Changed to SHURIKEN due to better SVG visibility in box
+        // SHURIKEN
         if (index === 1) return (
             <svg viewBox="0 0 100 100" style={{ width: '50%', height: '50%', filter: `drop-shadow(0 0 10px ${strokeColor})` }}>
                 <motion.path
@@ -87,18 +87,19 @@ const DojoBootSequence = ({ onComplete }) => {
 
         const timer = setInterval(() => {
             setProgress(prev => {
-                if (prev >= 100) {
+                const next = prev + 1.5;
+                if (next >= 100) {
                     clearInterval(timer);
                     return 100;
                 }
-                return prev + 2; // Double speed increment
+                return next;
             });
-        }, 30); // Faster tick
+        }, 30);
 
         // Sequence Steps
-        const s1 = setTimeout(() => setStep(1), 1000);
+        const s1 = setTimeout(() => setStep(1), 1200);
         const s2 = setTimeout(() => setStep(2), 3500);
-        const finish = setTimeout(onComplete, 4500);
+        const finish = setTimeout(onComplete, 4800);
 
         // Rapid Weapon Cycling
         const weaponCycle = setInterval(() => {
@@ -111,7 +112,7 @@ const DojoBootSequence = ({ onComplete }) => {
             clearInterval(weaponCycle);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); // Empty dependency array prevents re-run on prop change (Fixes 'Double Load')
+    }, []);
 
     return (
         <div style={{
@@ -132,14 +133,17 @@ const DojoBootSequence = ({ onComplete }) => {
                 backgroundSize: '100% 2px, 3px 100%'
             }} />
 
-            {/* High-Tech Grid Overlay */}
-            <div style={{
-                position: 'absolute', inset: 0, opacity: 0.2,
-                backgroundImage: 'linear-gradient(rgba(50, 255, 50, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(50, 255, 50, 0.2) 1px, transparent 1px)',
-                backgroundSize: '30px 30px',
-                filter: 'perspective(500px) rotateX(20deg)',
-                animation: 'gridScroll 10s linear infinite' // Needs global css ideally, but static ok for now
-            }} />
+            {/* High-Tech Grid Overlay - Smoothed Animation */}
+            <motion.div
+                animate={{ backgroundPosition: ['0px 0px', '0px 60px'] }}
+                transition={{ repeat: Infinity, ease: 'linear', duration: 2 }}
+                style={{
+                    position: 'absolute', inset: 0, opacity: 0.15,
+                    backgroundImage: 'linear-gradient(rgba(50, 255, 50, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(50, 255, 50, 0.2) 1px, transparent 1px)',
+                    backgroundSize: '30px 30px',
+                    filter: 'perspective(500px) rotateX(20deg)',
+                }}
+            />
 
             <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'radial-gradient(circle, transparent 40%, #000 100%)', pointerEvents: 'none' }} />
 
@@ -182,6 +186,18 @@ const DojoBootSequence = ({ onComplete }) => {
                             backdropFilter: 'blur(20px)',
                             overflow: 'hidden'
                         }}>
+                            {/* Scanning line effect */}
+                            <motion.div
+                                style={{
+                                    position: 'absolute', top: 0, left: 0, right: 0, height: '2px',
+                                    background: 'var(--kumite-aka)',
+                                    boxShadow: '0 0 10px var(--kumite-aka)',
+                                    zIndex: 15
+                                }}
+                                animate={{ top: ['0%', '100%', '0%'] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                            />
+
                             {/* Clean Frame Border */}
                             <div style={{ position: 'absolute', inset: '10px', border: '1px solid var(--kumite-aka)', opacity: 0.3, borderRadius: '10px', pointerEvents: 'none', zIndex: 10 }} />
 
@@ -238,10 +254,19 @@ const DojoBootSequence = ({ onComplete }) => {
                 )}
             </AnimatePresence>
 
-            {/* Footer Info */}
-            <div style={{ position: 'absolute', bottom: '30px', right: '40px', fontFamily: 'JetBrains Mono', color: '#444', fontSize: '0.8rem', textAlign: 'right' }}>
-                <span style={{ color: 'var(--kumite-aka)' }}>SYS.VER.4.1.0</span><br />
-                LOAD_PROGRESS: {progress}%
+            {/* Footer Info with Progress Bar */}
+            <div style={{ position: 'absolute', bottom: '30px', width: '80%', maxWidth: '600px', fontFamily: 'JetBrains Mono', color: '#444', fontSize: '0.8rem', textAlign: 'center' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', color: 'var(--kumite-aka)', opacity: 0.8 }}>
+                    <span>SYS.VER.4.1.0</span>
+                    <span>{Math.round(progress)}%</span>
+                </div>
+
+                {/* Visual Progress Bar */}
+                <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
+                    <motion.div
+                        style={{ width: `${progress}%`, height: '100%', background: 'var(--kumite-aka)', boxShadow: '0 0 10px var(--kumite-aka)' }}
+                    />
+                </div>
             </div>
         </div>
     );

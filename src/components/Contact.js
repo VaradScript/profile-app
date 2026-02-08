@@ -1,7 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Github, Linkedin, Twitter, Instagram, Mail } from 'lucide-react';
 
 const Contact = () => {
+    const SOCIAL_LINKS = [
+        { name: 'GITHUB', icon: <Github size={20} />, url: 'https://github.com/VaradScript' },
+        { name: 'LINKEDIN', icon: <Linkedin size={20} />, url: 'https://linkedin.com/in/varadscript' },
+        { name: 'X', icon: <Twitter size={20} />, url: 'https://x.com/varadscript' },
+        { name: 'INSTAGRAM', icon: <Instagram size={20} />, url: 'https://instagram.com/varadscript' }
+    ];
+
     return (
         <section className="section-wrapper">
             <motion.div
@@ -27,8 +35,10 @@ const Contact = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                 >
-                    <a href="mailto:varad@example.com" style={{
-                        display: 'inline-block',
+                    <a href="mailto:contact@varadscript.com" style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '12px',
                         padding: '24px 60px',
                         background: 'white',
                         color: 'black',
@@ -40,13 +50,47 @@ const Contact = () => {
                         borderRadius: '2px',
                         boxShadow: '0 20px 60px rgba(255,255,255,0.1)'
                     }}>
+                        <Mail size={18} />
                         TRANSMIT_MESSAGE
                     </a>
                 </motion.div>
 
-                <div style={{ marginTop: '100px', display: 'flex', justifyContent: 'center', gap: '40px' }}>
-                    {['X', 'INSTAGRAM', 'LINKEDIN', 'GITHUB'].map(social => (
-                        <a key={social} href="#!" style={{ fontSize: '10px', color: 'rgba(255,255,255,0.2)', textDecoration: 'none', letterSpacing: '2px', fontWeight: 700, fontFamily: 'JetBrains Mono' }}>{social}</a>
+                <div style={{ marginTop: '80px', display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
+                    {SOCIAL_LINKS.map((social) => (
+                        <motion.a
+                            key={social.name}
+                            href={social.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ y: -5, color: 'var(--dojo-accent)' }}
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                gap: '10px',
+                                fontSize: '10px',
+                                color: 'rgba(255,255,255,0.4)',
+                                textDecoration: 'none',
+                                letterSpacing: '2px',
+                                fontWeight: 700,
+                                fontFamily: 'JetBrains Mono',
+                                padding: '10px'
+                            }}
+                        >
+                            <div style={{
+                                padding: '15px',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                background: 'rgba(255,255,255,0.02)',
+                                transition: '0.3s'
+                            }}>
+                                {social.icon}
+                            </div>
+                            {social.name}
+                        </motion.a>
                     ))}
                 </div>
             </motion.div>
