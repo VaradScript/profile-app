@@ -1,13 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Twitter, Instagram, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Contact = () => {
     const SOCIAL_LINKS = [
         { name: 'GITHUB', icon: <Github size={20} />, url: 'https://github.com/VaradScript' },
-        { name: 'LINKEDIN', icon: <Linkedin size={20} />, url: 'https://linkedin.com/in/varadscript' },
-        { name: 'X', icon: <Twitter size={20} />, url: 'https://x.com/varadscript' },
-        { name: 'INSTAGRAM', icon: <Instagram size={20} />, url: 'https://instagram.com/varadscript' }
+        { name: 'LINKEDIN', icon: <Linkedin size={20} />, url: 'https://www.linkedin.com/in/varadaraj-d-ganiga-5b50a1246/' }
     ];
 
     return (
