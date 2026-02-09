@@ -43,6 +43,8 @@ body,
   /* Fallback for no-js, Lenis will override if needed but needs scrollable content */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  /* Native smooth scrolling for anchor links */
 }
 
 /* Removed gradient-shift animation */
@@ -518,7 +520,8 @@ h3 {
 
 @media (max-width: 768px) {
   .big-heading {
-    font-size: 3.5rem;
+    font-size: 10vh !important;
+    line-height: 0.9 !important;
   }
 
   .section-wrapper {
@@ -531,6 +534,45 @@ h3 {
 
   .hero-visual {
     display: none !important;
+  }
+
+  /* Hero section mobile adjustments */
+  .cyber-box {
+    padding: 2rem !important;
+  }
+
+  /* Mobile button stacking */
+  .hero-buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .hero-buttons a {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* Contact section mobile */
+  .contact-social-links {
+    gap: 20px !important;
+  }
+
+  /* Notch/Status bar mobile */
+  .dynamic-notch {
+    width: 90% !important;
+  }
+
+  /* Works grid mobile */
+  .works-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Back to Top button mobile positioning */
+  button[aria-label="Back to top"] {
+    bottom: 100px !important;
+    right: 20px !important;
+    width: 45px !important;
+    height: 45px !important;
   }
 }
 
@@ -639,4 +681,32 @@ h3 {
   color: black;
   border-color: white;
   box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+}
+
+/* --- KONAMI CODE MATRIX MODE --- */
+body.matrix-mode {
+  animation: matrix-glitch 0.3s infinite;
+}
+
+body.matrix-mode * {
+  color: #0f0 !important;
+  border-color: #0f0 !important;
+  text-shadow: 0 0 5px #0f0 !important;
+}
+
+body.matrix-mode .cyber-box {
+  border-color: #0f0 !important;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.3) !important;
+}
+
+@keyframes matrix-glitch {
+
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    filter: hue-rotate(90deg);
+  }
 }

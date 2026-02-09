@@ -19,6 +19,10 @@ import DojoBootSequence from './components/DojoBootSequence';
 import InkCursor from './components/InkCursor';
 import HUDOverlay from './components/HUDOverlay';
 import ScrollKatana from './components/ScrollKatana';
+import BackToTop from './components/BackToTop';
+import Terminal from './components/Terminal';
+import ParticleTrail from './components/ParticleTrail';
+import KonamiCode from './components/KonamiCode';
 
 import './App.css';
 
@@ -156,6 +160,7 @@ function App() {
 
           {/* New Ink Cursor */}
           {window.innerWidth > 768 && <InkCursor theme={theme} />}
+          {window.innerWidth > 768 && <ParticleTrail theme={theme} />}
 
           {/* Rest of the UI */}
 
@@ -173,6 +178,9 @@ function App() {
 
           {appState === 'active' && <StatusBar theme={theme} />}
           {appState === 'active' && window.innerWidth <= 768 && <MobileDock activeSection={activeSection} />}
+          {appState === 'active' && <BackToTop />}
+          {appState === 'active' && <Terminal />}
+          <KonamiCode />
 
           {appState === 'active' && (
             <main className="dashboard-main">

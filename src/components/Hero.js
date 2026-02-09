@@ -69,7 +69,7 @@ const Hero = () => {
                     Designing digital systems with lethal precision. Specializing in high-performance architectures and immersive interfaces. Every line of code is a strategic strike.
                 </motion.p>
 
-                <motion.div style={{ display: 'flex', gap: '20px' }}>
+                <motion.div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
                     <motion.a
                         whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(255,255,255,0.1)' }}
                         whileTap={{ scale: 0.95 }}
@@ -84,6 +84,15 @@ const Hero = () => {
                         style={{ padding: '16px 36px', border: '1px solid rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontFamily: 'JetBrains Mono', fontSize: '12px', fontWeight: 'bold', letterSpacing: '2px', borderRadius: '2px', transition: '0.3s' }}
                     >
                         ESTABLISH_LINK
+                    </motion.a>
+                    <motion.a
+                        whileHover={{ scale: 1.05, borderColor: 'var(--dojo-accent)', color: 'var(--dojo-accent)', boxShadow: '0 0 20px var(--dojo-glow)' }}
+                        whileTap={{ scale: 0.95 }}
+                        href="/resume.pdf"
+                        download
+                        style={{ padding: '16px 36px', border: '1px solid rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontFamily: 'JetBrains Mono', fontSize: '12px', fontWeight: 'bold', letterSpacing: '2px', borderRadius: '2px', transition: '0.3s' }}
+                    >
+                        DOWNLOAD_RESUME
                     </motion.a>
                 </motion.div>
             </motion.div>

@@ -62,6 +62,7 @@ const About = () => {
                                 <img
                                     src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop"
                                     alt="Sensei Spirit"
+                                    loading="lazy"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) brightness(0.7)' }}
                                 />
                                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-dark), transparent)' }}></div>

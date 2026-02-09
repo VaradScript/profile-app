@@ -9,7 +9,8 @@ const projects = [
         longDesc: "HadesConnect is a powerful tool designed for remote system management via Discord. It features a unique 'Kill Switch' functionality, secure remote desktop controls, and real-time execution handling, making it a robust solution for admins.",
         tech: ["Java", "Discord API", "Robot Class", "Networking"],
         image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=800&q=80",
-        link: "https://github.com/VaradScript/HadesConnect"
+        link: "https://github.com/VaradScript/HadesConnect",
+        liveUrl: null
     },
     {
         id: 'emotion',
@@ -18,7 +19,8 @@ const projects = [
         longDesc: "Utilizing advanced CNN architectures, this project detects human emotions from live video feeds with high accuracy. Built for scalability and integration into larger AI interactions systems.",
         tech: ["Python", "TensorFlow", "OpenCV", "Deep Learning"],
         image: "https://images.unsplash.com/photo-1555532538-dcdbd01d373d?auto=format&fit=crop&w=800&q=80",
-        link: "https://github.com/VaradScript/Emotion-Detection"
+        link: "https://github.com/VaradScript/Emotion-Detection",
+        liveUrl: null
     },
     {
         id: 'facex',
@@ -27,7 +29,8 @@ const projects = [
         longDesc: "FaceXprso goes beyond simple emotion detection by analyzing micro-expressions to gauge user sentiment in real-time. Ideal for UX research and accessibility tools.",
         tech: ["Python", "Keras", "AI", "Computer Vision"],
         image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
-        link: "https://github.com/VaradScript/FaceXprso"
+        link: "https://github.com/VaradScript/FaceXprso",
+        liveUrl: null
     },
     {
         id: 'portfolio',
@@ -36,7 +39,8 @@ const projects = [
         longDesc: "The very site you are looking at (or its predecessor). A showcase of modern web technologies, 3D animations, and experimental UI designs.",
         tech: ["React", "Three.js", "Framer Motion", "Cyber-UI"],
         image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
-        link: "https://github.com/VaradScript/VaradScript.github.io"
+        link: "https://github.com/VaradScript/VaradScript.github.io",
+        liveUrl: "https://varadscript.github.io"
     }
 ];
 
@@ -129,7 +133,12 @@ const Works = () => {
                                     return (
                                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))' }}>
                                             <div style={{ height: '100%', minHeight: '400px', position: 'relative' }}>
-                                                <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) brightness(0.7)' }} />
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.title}
+                                                    loading="lazy"
+                                                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) brightness(0.7)' }}
+                                                />
                                                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg-dark), transparent)' }}></div>
                                             </div>
                                             <div style={{ padding: '60px', display: 'flex', flexDirection: 'column' }}>
@@ -145,7 +154,18 @@ const Works = () => {
                                                     </div>
                                                 </div>
 
-                                                <div style={{ display: 'flex', gap: '20px', marginTop: 'auto' }}>
+                                                <div style={{ display: 'flex', gap: '20px', marginTop: 'auto', flexWrap: 'wrap' }}>
+                                                    {item.liveUrl && (
+                                                        <motion.a
+                                                            whileHover={{ scale: 1.05 }}
+                                                            href={item.liveUrl}
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                            style={{ background: 'var(--dojo-accent)', color: 'white', padding: '16px 30px', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.8rem', fontFamily: 'JetBrains Mono' }}
+                                                        >
+                                                            LIVE_DEMO
+                                                        </motion.a>
+                                                    )}
                                                     <motion.a
                                                         whileHover={{ scale: 1.05 }}
                                                         href={item.link}
