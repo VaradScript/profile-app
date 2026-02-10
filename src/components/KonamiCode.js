@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const KonamiCode = () => {
-    const [activated, setActivated] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
@@ -13,7 +12,6 @@ const KonamiCode = () => {
             if (e.key === konamiCode[konamiIndex]) {
                 konamiIndex++;
                 if (konamiIndex === konamiCode.length) {
-                    setActivated(true);
                     setShowModal(true);
                     konamiIndex = 0;
 
